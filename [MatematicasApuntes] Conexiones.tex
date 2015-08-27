@@ -1,0 +1,2125 @@
+\documentclass[a4paper, 12pt]{article}
+
+%%%%%%%%%%%%%%%%%%%%%%Paquetes
+\usepackage[spanish]{babel}  
+\usepackage{indentfirst} %%%%%%%%%%%%%%%%Crear un indent al principio
+\usepackage[latin1]{inputenc}%%%%%%%%%%%%ñ y acentos
+\usepackage{amstext}%%%%%%%%
+\usepackage{amsfonts}%%%%%%%
+\usepackage{amssymb}%%%%%%%% AMSLaTeX
+\usepackage{amscd}%%%%%%%%%%
+\usepackage{amsmath}%%%%%%%%
+\usepackage{enumerate}%%%%%%%%%%%%%%%%Mejoras del entorno enumerate
+\usepackage[all]{xy}
+\usepackage{latexsym}
+\usepackage{color}
+\usepackage[mathcal]{eucal}%%%%%%%Caligrafica matematica
+\usepackage{graphicx}
+\usepackage{url}
+\usepackage{tcolorbox}
+\usepackage{setspace}
+\onehalfspacing
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%Teoremas
+\newtheorem{teo}{Teorema}[section]%%%%%%%%% Teorema
+\newtheorem{defi}{Definición}[section]%%%%%%%% Definicion
+\newtheorem{lema}[teo]{Lema}%%%%%%%%%%%%% Lema
+\newtheorem{propo}[teo]{Proposición}%%%%%%%% Proposicion
+\newtheorem{cor}[teo]{Corolario}%%%%%%%%%%%Corolario
+\newtheorem{pro1}{\small Problema}%[chapter]%%%%%%%%%Problema
+\newenvironment{pro}{\begin{pro1} \sf \small} {\end{pro1}}
+\newtheorem{*pro1}[pro1]{* Problema}%%%%%%%%%%Problema complicado
+\newenvironment{*pro}{\begin{*pro1} \sf} {\end{*pro1}}
+\newcommand{\escalar}[2]{\left\langle\, #1,#2\, \right\rangle}  %%%Producto escalar 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%Comandos
+\newcommand{\dem}{\noindent\textbf{Demostración. }\vspace{0.3 cm}}%%Demostracion
+\newcommand{\R}{\mathbb{R}}%%%%%%%%%%%%Numeros reales
+\newcommand{\F}{\mathbb{F}}%%%%%%%%%%%%Cuerpo
+\newcommand{\C}{\mathbb{C}}%%%%%%%%%%%%Numeros complejos
+\newcommand{\Q}{\mathbb{Q}}%%%%%%%%%%%%Numeros racionales
+\newcommand{\N}{\mathbb{N}}%%%%%%%%%%%%Numeros naturales
+\newcommand{\Z}{\mathbb{Z}}%%%%%%%%%%%%Numeros enteros
+\newcommand{\g}{\mathfrak{g}}%%%%%%%%%%%%Algebra de Lie del grupo G
+\newcommand{\V}{\mathcal{V}}%%%%%%%%%%%%Variedad
+\newcommand{\W}{\mathcal{W}}%%%%%%%%%%%%Variedad
+\newcommand{\coZ}{Z}%%%%
+\newcommand{\coB}{B}%%%%  Cohomologia
+\newcommand{\coH}{H}%%%%
+\newcommand{\h}{\mathcal{H}}%%%%%%%%%%%%Algebra de Lie del grupo H
+\newcommand{\fin}{ $\Box $ \vspace{0.4 cm}}
+\newcommand{\p}{\mathfrak{p}}%%%%%%%% Ideal primo
+\newcommand{\m}{\mathfrak{m}}%%%%%%%% Ideal maximal
+\newcommand{\limind}{\lim_{\longrightarrow} } 
+\newcommand{\gp}{\mathcal{G'}}%%%%%%%%%%%Algebra del grupo G'
+\newcommand{\lto}{\longrightarrow}%%%%%%Simplificacion de la flecha larga
+\newcommand{\wa}{\omega_2} %%%%%%%%%%%forma simplectica
+\newcommand{\Wa}{\Omega_2} %%%%%%%%%% forma simplectica lineal
+\newcommand{\lag}{\lambda_g}%%%%%%%%%%%%Traslacion a la izquierda
+\newcommand{\rg}{\rho_g}%%%%%%%%%%%%%%%%Traslacion a la derecha
+\newcommand{\Gr}{\boldsymbol{G}}%%%%%%%%%%Recubridor universal
+\newcommand{\norma}[1]{\: \parallel #1 \!\parallel\! }%%%Norma de un vector
+\newcommand{\abs}[1]{\left|\, #1 \right|}  %%%Valor absoluto 
+\newcommand{\Pro}{\mathbb{P}}%%%%%%Espacio proyectivo
+\newcommand{\Problemas}{\newpage  \begin{center}{\Huge Problemas}\end{center}}
+\newcommand{\Ejemplos}{\vspace{0.5 cm} {\bf Ejemplos}}
+\newcommand{\cpt}{\textit{cpt}}  %%%%%Casi por todo
+\newcommand{\campos}{\mathfrak{X} } %%%% Campos en una variedad
+\newcommand{\kulkarni}{\odot}
+\renewcommand{\to}{\lto}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%Operadores
+\DeclareMathOperator{\End}{End}%%%%%%%%%%Endomorfismo
+\DeclareMathOperator{\Ad}{Ad}%%%%%%%%%%Adjunta
+\DeclareMathOperator{\grad}{grad}%%%%%%%%%%Graciente
+\DeclareMathOperator{\Dif}{Dif}%%%%%%%%%%Diferenciales
+\DeclareMathOperator{\sop}{sop}%%%%%%%%%Soporte
+\DeclareMathOperator{\distancia}{d}%%%%%%%%Distancia
+\DeclareMathOperator{\sen}{sen}%%%%%%%%%%Seno español
+\DeclareMathOperator{\Der}{Der}%%%%%%%%%%Derivaciones
+\DeclareMathOperator{\rang}{rang}%%%%%%%%Rango
+\DeclareMathOperator{\Hom}{Hom}%%%%%%Homomorfismos
+\DeclareMathOperator{\Ann}{Ann}%%%%%%%Anulador
+\DeclareMathOperator{\Img}{Im} %%%%Parte imaginaria
+\DeclareMathOperator{\rad}{rad}%%%%%%%%Radical
+\DeclareMathOperator{\Ker}{Ker}%%%%%%%Nucleo
+\DeclareMathOperator{\Id}{Id}%%%%%%% Identidad
+\DeclareMathOperator{\GL}{GL}%%%%%%%%%Grupo lineal
+\DeclareMathOperator{\Apli}{Apli}%%%%%%Aplicaciones
+\DeclareMathOperator{\Bil}{Bil}%%%%%Bilineales
+\DeclareMathOperator{\Spec}{Spec}%%%%Espectro
+\DeclareMathOperator{\Ob}{Ob}  %%% Objetos de una categoría
+\DeclareMathOperator{\Tor}{Tor}%%%%%Torsion de una conexión lineal
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%
+\title{Conexiones}
+\author{José Luis Tábara}
+\date{jltabara@gmail.com}
+%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black]
+
+\vspace{-1cm}
+\maketitle
+
+\end{tcolorbox}
+
+\thispagestyle{empty}
+
+\tableofcontents
+
+\newpage
+
+
+
+\section{Definición y ejemplos}\setcounter{page}{1}
+
+Existen varias definiciones distintas de conexión sobre una variedad. Posiblemente la más habitual e intuitiva es la que sigue.
+
+\begin{defi}
+
+Sea $\V$ una variedad.  Una \index{conexión} {\sf conexión} $\nabla$ en $\V$ es una aplicación
+$$
+\begin{array}{rccc}
+\nabla: & \campos(\V) \times \campos(\V) &\lto &\campos(\V)\\
+   &       (X\,\,,\,\,Y) & \lto & \nabla_X Y
+\end{array}
+$$
+que cumple las siguientes propiedades:
+
+\begin{enumerate}[\indent 1) ]
+
+\item $\nabla_{X_1+X_2}Y = \nabla_{X_1} Y + \nabla_{X_2} Y$
+
+\item $\nabla_{fX}Y= f \nabla_XY$
+
+\item $\nabla_X(Y_1+Y_2)= \nabla_X Y_1 + \nabla_X Y_2$
+
+\item $\nabla_X (fY)= X(f) Y +f \nabla_X Y$
+
+\end{enumerate}
+
+\end{defi}
+
+La expresión $\nabla_X Y$ es la \index{derivada covariante}{\sf derivada covariante} de $Y$ con respecto al campo~$X$ o también la derivada covariante de $Y$ en la dirección $X$.
+
+\bigskip
+
+\noindent{\bf Propiedades.}
+
+\begin{itemize}
+
+\item Si $\lambda$ es una constante
+$$
+\nabla_X(\lambda Y) = X(\lambda) Y + \lambda \nabla_X Y= \lambda \nabla_X Y
+$$
+y la aplicación $\nabla$ es bilineal sobre $\R$.
+
+\item Una conexión lineal es una aplicación lineal (sobre el anillo de funciones) en la primera variable y una derivación en la segunda.  Aplicando dichas propiedades es fácil probar que $\nabla_X Y=0$ si alguno de los campos $X$ ó $Y$ es el campo nulo.
+
+\end{itemize}
+
+
+La definición dada se conoce en la literatura como {\sf definición de Koszul}.  Existe otra, equivalente a esta, que es menos intuitiva, pero en algunos aspectos es más simple.  Denotemos por $T^1_1(\V)$ el conjunto de tensores de tipo $(1,1)$ de la variedad $\V$.  Cada tensor de tipo $(1,1)$ se puede entender como un endomorfismo del módulo\footnote{Sea $T$ es un tensor de tipo $(1,1)$.  Para entender $T$ como un endomorfismo del módulo de los campos vectoriales definimos $T(X)$ como el único campo que cumple \mbox{$\omega(T(X))=T(X,\omega)$}. Dicha aplicación es en efecto lineal y produce el isomorfismo deseado.  Nótese que un campo $Y \in \campos(\V)$ está determinado de modo unívoco si conocemos el valor de $\omega(Y)$ para cualquier forma lineal $\omega$.} $\campos(\V)$.
+
+
+
+
+\begin{defi}
+
+Una {\sf conexión} $\nabla$ en $\V$ es una aplicación
+$$
+\begin{array}{rccc}
+\nabla: & \campos(\V) & \lto & T_1^1(\V) \\
+       & X  &  \lto &   \nabla(X) 
+\end{array}
+$$
+que cumple:
+
+\begin{enumerate}[\indent 1) ]
+
+\item Es aditiva: $\nabla(X_1+X_2)=\nabla(X_1)+\nabla(X_2)$
+
+\item Se comporta como una derivación: $\nabla(fX)=\text{d}f \otimes X + f \otimes \nabla(X)$
+
+\end{enumerate}
+
+\end{defi}
+
+El tensor $\nabla(X)$ es la {\sf diferencial covariante} de $X$.  Para recuperar la definición de Koszul a partir de esta debemos escribir
+$$
+\nabla_X Y =\nabla(Y)(X)
+$$
+
+
+La aditividad es clara.  Además dicha definición es lineal en $X$, puesto que $\nabla(Y)$ es un endomorfismo.  Sin embargo en la componente~$Y$ se comporta como una derivación, debido a la propiedad que define la conexión.
+La misma fórmula nos permite comparar en el otro sentido las definiciones dadas.  
+
+
+
+\bigskip
+
+\noindent{\bf Ejemplos.}
+
+\begin{itemize}
+
+\item  Consideramos en $\R^n$ la base canónica $\partial_i$.  Cada campo se puede expresar de modo único como combinación lineal de los campos coordenados donde los coeficientes son funciones diferenciables.  Si $X=x^i\partial_i$ e \mbox{$Y= y^i \partial_i$} definimos
+$$
+\nabla_X Y =  X(y^i) \partial_i
+$$
+
+Se comprueban de modo inmediato las propiedades de la definición.  Por ejemplo, veamos la propiedad {\it 2)}.  Con las mismas notaciones tenemos que $fY = (fy^i)\partial_i$. Entonces
+\begin{equation*}
+\begin{split}
+\nabla_X(fY)= X(fy^i) \partial_i = (X(f)y^i +f X(y^i))\partial_i = \\ 
+ X(f)y^i \partial_i + f X(y^i)\partial_i= X(f)Y + f \nabla_X Y 
+ \end{split}
+\end{equation*}
+Esta es la {\sf conexión estandard} de $\R^n$.  Si no se dice lo contrario, siempre que hablemos de una conexión en $\R^n$ no referiremos a esta.
+
+
+\item Si $\V$ es una variedad que puede ser recubierta por una única carta, la definición anterior induce una conexión en $\V$.  Si cambiamos la carta global, en general,  cambiamos también la conexión.
+
+\item Sea $\V \subset \R^n$ una subvariedad.   Como en $\R^n$ existe una estructura euclídea natural, podemos descomponer en suma directa 
+$$
+T_p(\R^n)= T_p(\V) \oplus T_p(\V)^\perp \text{ para todo } p \in \V
+$$
+Todo vector admite la descomposición $e= e^\intercal+e^\perp$.  El vector $e^\intercal$ se dice que es la {\sf parte tangencial} de $e$ y $e^\perp$ es la {\sf parte normal} de $e$.
+
+Todo campo vectorial $X$ sobre $\V$ admite una extensión $\widetilde X$ a un campo vectorial en $\R^n$. Dados dos campos $X$ e $Y$ en $\V$ construimos una conexión en $\V$ que denotaremos $\nabla^\intercal$
+$$
+\nabla^\intercal_XY =(\nabla_{\widetilde X}\widetilde Y)^\intercal
+$$
+A lo largo de estas notas demostraremos que esta definición es independiente de las extensiones (proposición \ref{propo:derivadacurva}).  Es claro que esta definición cumple todas las propiedades de una conexión.  Decimos que $\nabla^\intercal$ es la {\sf conexión inducida} en la subvariedad por la conexión $\nabla$. 
+
+
+\item \label{ejemplo:coordenadas} Supongamos dadas en $\R^n$ un total de $n^3$ funciones diferenciables $\Gamma_{ij}^k$.   Con las notaciones del ejemplo anterior definimos
+$$
+\nabla_X Y =   \left(X( y^k) +  x^i y^j \Gamma_{ij}^k \right)\partial_k
+$$
+Esto nos da una nueva conexión en $\R^n$. Cuando todas las funciones son nulas recuperamos la conexión estandard.
+
+\end{itemize}
+
+\begin{quote}
+
+\begin{pro}
+
+Demostrar que  los dos  últimos ejemplos cumplen todas las propiedades que definen la conexión.
+
+\end{pro}
+
+
+\end{quote}
+
+
+\begin{quote}
+
+\begin{pro}
+
+En el primer ejemplo, consideremos dos sistemas de coordenadas lineales en $\R^n$.  El cambio de variable entre ellos viene determinado por una matriz $A$. Demostrar que las conexiones asociadas a cada sistema de coordenadas son en realidad la misma conexión. 
+Del mismo modo si cambiamos las coordenadas efectuando una traslación por un vector constante, la conexión no cambia.
+La conexión construida en el primer ejemplo se puede construir a partir de cualquier sistema de referencia afín.
+
+\end{pro}
+
+\end{quote}
+
+\begin{quote}
+
+\begin{pro}
+
+Sea $E$ un espacio vectorial.  Fijada una base introducimos una conexión por analogía con el caso de $\R^n$.  Demostrar que dicha conexión es independiente de la base.
+
+\end{pro}
+
+\end{quote}
+
+En toda variedad que tenga una carta global existen conexiones.  En las demás también existen y se pueden construir \guillemotleft pegando\guillemotright \ dichas conexiones.
+
+
+\begin{propo}
+
+En toda variedad existen conexiones.
+
+\end{propo}
+
+\dem
+
+Sea $\{U_\alpha\}$ un recubrimiento por abiertos coordenados de la variedad y $\{\varphi_\alpha\}$ una partición de la unidad subordinada a dicho recubrimiento.  En cada abierto coordenado puede definirse  una conexión, que denotamos $\nabla^\alpha$.  Dados campos globales $X$ e $Y$ definimos
+$$
+\nabla_XY= \sum \varphi_\alpha \nabla^\alpha_X Y
+$$
+Se comprueba que  es una conexión en la variedad. \fin
+
+
+\section{Localización}
+
+Por definición, una conexión es un objeto local, en el sentido de que los valores en un punto $p$ dependen solamente del valor de los campos implicados en el entorno del punto $p$.  Esto es equivalente a decir que la conexión solamente depende del germen de los campos.
+
+\begin{propo}
+
+Sean $X_1$ y $X_2$ dos campos cuyos gérmenes en $p$ coincidan.  Entonces para todo campo $Y$ se cumple
+$$
+(\nabla_{X_1} Y)_p = (\nabla_{X_2} Y)_p
+$$
+
+\end{propo}
+
+\dem
+
+Si los campos $X_1$ y $X_2$ tienen el mismo germen en $p$, existe un abierto~$U$ que contiene a $p$ de tal forma que ${X_1}_{\mid U} = {X_2}_{\mid U}$.  Tomamos una función diferenciable~$f$, suyo soporte esté en $U$ y  que cumpla $f(p)=1$.  Entonces el campo $f(X_1-X_2)$ es nulo en toda la variedad.  Para todo campo $Y$ se cumple 
+$$
+\nabla_{f(X_1-X_2)} Y =0
+$$
+De las propiedades de la conexión deducimos que 
+$$
+f(\nabla_{X_1} Y - \nabla_{X_2} Y) = 0
+$$
+Tomamos valor en $p$ en el campo anterior y obtenemos
+$$
+f(p) ((\nabla_{X_1} Y)_p - (\nabla_{X_2} Y )_p)=0
+$$
+de donde se concluye.  \fin
+
+
+Siguiendo argumentos análogos se puede demostrar que si dos campos $Y_1$ e $Y_2$ tienen el mismo germen en $p$ entonces
+$$
+(\nabla_X Y_1 )_p = (\nabla_X Y_2)_p
+$$
+para todo campo $X$.
+
+\begin{quote}
+
+\begin{pro}
+
+Sea $X$ un campo cuyo germen en $p$ sea nulo.  Con ayuda de las particiones de la unidad, demostrar que existe una función $f$ tal que
+
+\begin{itemize}
+
+\item  $fX=X$ en  toda la variedad.
+
+\item $f$ tiene germen nulo en $p$.
+
+\end{itemize} 
+  Utilizar este resultado para demostrar que $(\nabla_X Y)_p=0$ si $X$ tiene germen nulo en $p$.  Probar resultados análogos en la segunda componente de la conexión.
+
+\end{pro}
+
+\end{quote}
+
+Dada una conexión $\nabla$ en $\V$, se induce una conexión en todo abierto $U$ de la variedad.  El procedimiento consiste en extender los campos definidos en $U$ a  campos definidos en toda la variedad, y demostrar posteriormente que los cálculos son independientes de dicha extensión.  Veamos primeramente que todo germen se puede extender a un campo global.  De forma más precisa, tenemos el siguiente
+
+\begin{lema}
+
+Sea $X$ un campo vectorial definido en un entorno $U$ de $p$.  Existe un campo $\widetilde{X}$, definido en toda la variedad, y de tal forma que los gérmenes de $X$ y de $\widetilde{X}$ en el punto $p$ coinciden.
+
+\end{lema}
+
+
+\dem
+
+Sea $U$ el abierto donde está definido el campo $X$.  Tomamos un abierto $U'$ que contenga a $p$ y esté contenido en $U$.  Sea $f$ una función diferenciable de tal forma que $f_{\mid U'}=1 $ y además $\sop(f) \subset U$.  Entonces el campo $\widetilde{X} = fX$ está definido globalmente y coincide con $X$ en el abierto $U'$, por lo que los gérmenes de $X$ y de $\widetilde{X}$ en $p$ coinciden. 
+ Además el campo $\widetilde{X}$ es diferenciable, puesto que en los puntos de $U$ es el producto de una función diferenciable, por un campo diferenciable definido en $U$.  En el complementario de $U'$, el campo $\widetilde{X}$ coincide con el campo nulo, que es también diferenciable. \fin
+ 
+\begin{teo}
+
+Dada una conexión $\nabla$ en $\V$, existe una conexión, que seguiremos denotando $\nabla$, en todo abierto $U$, definida por 
+$$
+(\nabla_ X Y)_p= (\nabla_{\widetilde{X}} \widetilde{Y})_p
+$$
+donde $\widetilde{X}$, $\widetilde{Y}$ son campos definidos en toda la variedad y que tienen el mismo germen que $X$ e $Y$ en $p$.
+
+
+\end{teo}
+
+\dem
+
+El lema anterior demuestra que la extensión de los campos existe y las proposiciones anteriores prueban que los cálculos no dependen de las extensiones que tomemos. \fin
+
+
+
+Sabemos que el valor de la conexión depende solamente de los gérmenes de los campos.  Sin embargo, este resultado se puede refinar un poco más, si el campo está en la primera componente de la conexión.
+
+\begin{propo}
+
+Sean $X$, $X'$ dos campos tales que $X_p=X'_p$.  Entonces
+$$
+(\nabla_X Y)_p = (\nabla_{X'} Y )_p
+$$
+
+\end{propo}
+
+\dem
+
+Por linealidad, basta demostrar que $(\nabla_XY)_p=0$ si $X_p=0$.
+
+Tras localizar, podemos suponer que nos encontramos en un abierto coordenado. En dicho abierto, todo campo $X$ se puede escribir en la forma $X=  x^i \partial_i$, donde $x^i(p)=0$.  Entonces
+$$
+\nabla_X Y = \nabla_{ x^i \partial_i} Y =  x^i \nabla_{\partial_i} Y
+$$
+Tomando valor en $p$ obtenemos
+$$
+(\nabla_X Y)_p= x^i(p) (\nabla_{\partial_i} Y )_p=0
+$$
+que es lo que pretendíamos demostrar. \fin
+
+Este mismo argumento es el que se utiliza para demostrar que el valor de los tensores en un punto dependen solamente de los valores de los campos y formas en  dicho punto.  Este resultado es consecuencia entonces de la linealidad sobre el anillo de funciones.
+
+\bigskip
+
+\noindent{\bf Observación.}
+
+\smallskip
+
+Se debe tener cuidado, pues esta proposición no es cierta en la segunda variable.  El valor de $\nabla_X Y$ depende de los valores de $Y$ en el punto $p$ y de las derivadas de ese campo en $p$.  Las derivadas si dependen de los valores de $Y$ en un entorno y no solo en un punto.
+
+\section{Cálculos en coordenadas}
+
+
+Dada una variedad $\V$ de dimensión $n$, decimos que un conjunto de $n$ campos $\{E_i\}$ es una {\sf base local de campos} en el abierto $U$ (que puede ser toda la variedad) si $\{(E_i)_p\}$ es una base para todo $p \in U$.  Cada campo $X$ en $U$ se puede expresar, de modo único, como $X=  x^i E_i$.  
+
+\bigskip
+
+
+Sea $X=  x^i E_i$ e $Y=  y^j E_j$.  Calculamos la derivada covariante
+\begin{equation*}
+\begin{split}
+\nabla_X Y= (\nabla_{X}(y^j E_j))=  X(y^j) E_j+ y^j \nabla_{X}E_j=\\
+X(y^j)E_j+x^iy^j \nabla_{E_i}E_j
+\end{split}
+\end{equation*}
+
+Si  conocemos los campos $\nabla_{E_i}E_j$, conocemos la derivada covariante de cualquier par de campos. El término $\nabla_{E_i}E_j$ es un campo, y de este modo será combinación lineal de los campos $E_i$.
+
+\begin{defi}
+
+Llamamos {\sf símbolos de Cristoffel} de la conexión $\nabla$ en la base de campos $\{E_i\}$ a las funciones $\Gamma_{ij}^k$ definidas por la relación:
+$$
+\nabla_{E_i} E_j = \Gamma_{ij}^k E_k
+$$
+
+\end{defi}
+
+Con las notaciones anteriores, la derivada covariante se expresa
+$$
+\nabla_X Y = (X (y^k) +  x^iy^j \Gamma_{ij}^k )E_k
+$$
+\begin{quote}
+
+\begin{pro}
+
+Si $U$ es un abierto coordenado, los campos $\partial_i$ forman una base local.  Relacionar los cálculos anteriores con el ejemplo de la página~\pageref{ejemplo:coordenadas}.
+
+\end{pro}
+
+
+\end{quote}
+
+\begin{quote}
+
+\begin{pro}
+
+Utilizar la expresión  en coordenadas de la conexión para demostrar que el valor de $\nabla_X Y$ solamente depende del valor de $X$ en el punto $p$.
+
+\end{pro}
+
+\end{quote}
+
+\begin{quote}
+
+\begin{pro}
+
+Si tomamos otra base de campos locales $\{F_i\}$, los coeficientes de la conexión en esta base son distintos.  Relacionar dichos coeficientes con los coeficientes en la base $\{E_i\}$ y con la matriz de cambio de base.
+
+\end{pro}
+
+\end{quote}
+
+
+\section{Derivación de tensores}
+
+Dado un campo $X$ y una conexión $\nabla$ en la variedad podemos derivar con respecto a $X$ cualquier campo vectorial $Y$ sin más que aplicar la fórmula $\nabla_XY$.  Análogamente podemos derivar cualquier función $f$ escribiendo, por definición, $\nabla_Xf =X(f)$.
+
+De acuerdo con esta nueva notación, las propiedades que define la conexión nos indican que el operador $\nabla_X$ es una derivación\footnote{Sea $A$ un álgebra sobre el cuerpo $\R$.  Una aplicación lineal $D$ es una derivación de dicho álgebra si cumple $D(ab) = D(a)b +aD(b)$ para cualesquiera elementos del álgebra.}.  Las propiedades vista anteriormente nos permitirán construir una derivación $\nabla_X$ en el álgebra  tensorial de una variedad, que sobre los campos y las funciones coincida con lo  que ya tenemos.  Veamos como las propiedades de la derivación nos indican que dicha derivación, si existe, es única.  También nos servirá para asimilar de modo  más rápido la construcción que vamos a hacer.
+
+\bigskip
+
+Si $\nabla_X$ es una derivación del álgebra tensorial, inevitablemente debe ser una aplicación lineal sobre $\R$. De este modo 
+$$
+\nabla_X(\lambda T+\mu T') = \lambda \nabla_X(T) + \mu \nabla_X(T')
+$$
+También debe derivar el producto tensorial de acuerdo a la regla de Leibniz
+$$
+\nabla_X(T \otimes T')= \nabla_X(T) \otimes T' + T \otimes \nabla_X(T')
+$$
+
+Además, por ser una derivación, necesariamente es un operador local.  Esto significa que   $(\nabla_X T)_p = (\nabla_XT')_p$ si $T$ y $T'$ tienen el mismo germen en~$p$.  Podemos situarnos en un abierto y derivar los tensores en dicho abierto.
+
+Sea $\{Y_i\}$ una base local de campos en un abierto $U$ de la variedad.  Todo tensor covariante sobre $U$ se escribe de modo único como suma de monomios del tipo
+$$
+f Y_{i_1} \otimes \dots \otimes Y_{i_j}
+$$
+
+Si las propiedades anteriores se cumplen, necesariamente existe una única forma de calcular $\nabla_X$ para cualquier tensor covariante.
+
+Sin embargo, no está claro como debemos derivar los tensores contravariantes.  Para ver como se debe hacer debemos añadir alguna propiedad más.
+
+Sea $\omega$ una $1$-forma e $Y$ un campo vectorial.  Denotamos por $\escalar{\omega}{Y}$ a la función $\omega(Y)$, que es una aplicación bilineal sobre el anillo de funciones.  Pediremos que $\nabla_X$ derive dicha expresión como si se tratara de un producto.
+$$
+\nabla_X \escalar{\omega}{Y} = \escalar{\nabla_X\omega}{Y}+ \escalar{\omega}{\nabla_X Y}
+$$
+
+De este modo no vemos obligados a definir la derivada de una forma lineal con la fórmula
+$$
+(\nabla_X \omega)(Y) = \nabla_X(\omega(Y))-\omega(\nabla_X Y)
+$$
+
+Conociendo como se derivan formas lineales, sabemos derivar cualquier tensor contravariante, pues localmente todo tensor de este tipo es producto tensorial de formas lineales.  De este modo el operador $\nabla_X$ que hemos estudiado debe ser único.  Veamos ahora su existencia, construyendolo explícitamente.
+
+Comenzamos definiendo la derivada covariante en el caso de $1$-formas y posteriormente pasamos al caso de un tensor general.
+
+\begin{defi}
+
+Sea $\V$ una variedad y $\nabla$ una conexión.  La derivada covariante de la $1$-forma $\omega$ respecto al campo $X$ es:
+$$
+(\nabla_X \omega)Y = X(\omega (Y))- \omega(\nabla_X Y)
+$$
+
+\end{defi}
+
+La $1$-forma  $\nabla_X \omega$ es conocida puesto que sabemos como actua sobre cualquier campo vectorial.
+
+\begin{quote}
+
+\begin{pro}
+
+Demostrar que con esta definición se cumplen las siguientes propiedades:
+
+\begin{itemize}
+
+\item $\nabla_X (\omega+ \omega') = \nabla_X \omega + \nabla_X \omega'$
+
+\item $\nabla_X (f \omega) = X (f) \omega + f \nabla_X \omega$
+
+\item $\nabla_X (\omega(Y)) = \nabla_X \omega(Y)+ \omega (\nabla_X Y)$
+
+\item Si $\omega$ y $\omega'$ tienen el mismo germen en $p$ entonces $(\nabla_X \omega)_p =(\nabla_X \omega')_p$
+
+\item Si $X$ y $X'$ son dos campos que coinciden en el punto $p$, entonces $(\nabla_X \omega)_p= (\nabla_{X'} \omega)_p$ para toda forma $\omega$.  Esto nos permite calcular la derivada covariante de una $1$-forma respecto a un vector.
+
+\end{itemize}
+
+\end{pro}
+
+
+\end{quote}
+
+Conocida la derivada covariante de campos y $1$-formas y siguiendo el proceso estandar para extender derivaciones al álgebra tensorial damos la
+
+\begin{defi}
+
+Sea $T$ un tensor de tipo $(l,k)$ ($T \in T_l^k (\V)$) y $X$ un campo vectorial.  La derivada covariante de $T$ respecto a $X$ es el único tensor de tipo $(l,k)$ que cumple:
+\begin{equation}\nonumber
+\begin{split}
+(\nabla_X T)( \omega_1, \dots, \omega_l, Y_1, \dots, Y_k)= X\left( T( \omega_1, \dots, \omega_l, Y_1, \dots, Y_k) \right)\\ \nonumber
+- \sum_{j=1}^l T ( \omega_1, \dots, \nabla_X \omega_j, \dots , \omega_l, Y_1, \dots, Y_k)\\
+- \sum_{i=1}^k T ( \omega_1, \dots, \omega_l, Y_1, \dots, \nabla_X Y_i, \dots , Y_k)
+\end{split}
+\end{equation}
+donde $\omega_j$ son $1$-formas e $Y_i$ son campos.
+
+\end{defi}
+
+
+\begin{propo}
+
+$\nabla_X$ es una derivación del álgebra tensorial.
+
+\end{propo}
+
+\dem
+
+No realizaremos la demostración, debido a la tediosidad de los cálculos, que por otra parte son elementales.
+
+Se deben probar los siguientes hechos.  $\nabla_X$ es lineal.  Para ello tomamos tensores $T$ y $T'$ y comprobamos que $\nabla_X(\lambda T+T')=\lambda \nabla_X(T) + \nabla_X(T')$ viendo que su acción sobre cualesquiera campos y $1$-formas es idéntica.
+
+También se debe demostar que $\nabla_X(T \otimes T') =\nabla_X(T) \otimes T' + T \otimes \nabla_X(T')$ procediendo del mismo modo.  Dividiendo cada sumatorio en dos partes y sacando factor común se concluye. \fin
+
+\begin{quote}
+
+\begin{pro}
+
+Demostrar que $\nabla_{fX+X'} = f \nabla_X + \nabla_{X'}$ como derivaciones del álgebra tensorial.
+
+\end{pro}
+
+\end{quote}
+
+\begin{cor}
+
+$\nabla_X$ es una derivación del álgebra de formas diferenciales.
+
+\end{cor}
+
+\dem
+
+Solamente debemos demostrar que 
+$$
+\nabla_X(\omega_l \wedge \omega_k)= \nabla_X (\omega_l) \wedge \omega_k + \omega_l \wedge \nabla_X(\omega_k)
+$$
+ que es inmediato a partir de la propiedad 
+ $$
+ \nabla_X(\omega_l \otimes \omega_k)= \nabla_X (\omega_l) \otimes \omega_k + \omega_l \otimes \nabla_X(\omega_k)
+ $$
+  que cumplen todos los tensores, en particular los hemisimétricos.  \fin
+  
+\begin{quote}
+
+\begin{pro}
+
+Sea $\{E_i\}$ una base local local de campos en $U$.  Denotamos por $\{\varphi_i\}$ la base dual, que es la única que cumple $\varphi_i(E_j) = \delta_{ij}$.  Escribiendo en coordenadas $\omega = \omega_i \varphi_i$ y $X = x^i E_i$, calcular $\nabla_X (\omega)$ utilizando los símbolos de Cristoffel.
+
+\end{pro}
+
+
+\end{quote}
+
+La definición dada de derivada covariante de un tensor es el análogo a la definición de Koszul.  Sin embargo podemos incorporar el campo $X$ en la definición, añadiendo un grado de covarianza al tensor.  Obtenemos de este modo la diferencial absoluta o derivada covariante absoluta.
+
+\begin{defi}
+
+Sea $T \in T_l^k (\V)$.  Llamamos {\sf derivada covariante absoluta} de $T$ al tensor $\nabla T$ de tipo $(l,k+1)$ que cumple:
+$$
+(\nabla T) (\omega_1, \dots , \omega_l, Y_1, \dots, Y_k, X)= (\nabla_X T)(\omega_1, \dots , \omega_l, Y_1, \dots, Y_k)
+$$
+
+\end{defi}
+
+El lector puede comprobar sin esfuerzo que en efecto $\nabla T$ es lineal en la última componente.
+
+
+\begin{quote}
+
+\begin{pro}
+
+Sea $\{E_i\}$ una base local de campos y $\{\varphi_i\}$ su base dual.  Calcular $\nabla(E_i)$ en la base $E_i \otimes \varphi_j$.  Conociendo la derivada covariante absoluta de todo tensor, se puede reconstruir la conexión.  Explicar el proceso.
+
+\end{pro}
+
+
+\end{quote}
+
+\begin{quote}
+
+\begin{pro}
+
+La diferencial absoluta de una función $\nabla f$ coincide con la diferencial exterior $df$ de dicha función, cosa que se observa rápidamente al comparar las definiciones.  La derivada covariante segunda $\nabla^2(f) = \nabla(\nabla(f))$ es el {\sf hessiano} de la función~$f$.  El cálculo del hessiano se puede realizar en coordenadas, o también estudiando su acción sobre pares de campos vectoriales.
+
+\begin{itemize}
+
+\item  Demostrar que $\nabla^2 f(X,Y)= Y(X(f))- (\nabla_Y X) f$.
+
+\item Calcular el hessiano en coordenadas.
+
+\end{itemize}
+
+\end{pro}
+
+\end{quote}
+
+
+
+
+
+
+\section{Campos sobre curvas}
+
+En principio la definición de conexión exige que los campos estén definidos globalmente.  Posteriormente hemos visto que para el cálculo $(\nabla_XY)_p$ basta conocer el vector $X_p$ y el germen de $Y$ en el punto $p$.
+
+Podemos reducir aún el número de hipótesis y ver que en realidad $(\nabla_XY)_p$ solamente depende de los valores del campo $Y$ en una curva que pase por $p$ y que tenga como vector tangente en $p$ el vector $X_p$ (proposición \ref{propo:derivadacurva}).  Esto nos permitirá derivar campos que estén solamente definidos en curvas de la variedad.
+
+\begin{defi}
+
+Una {\sf curva} $c$ en una variedad $\V$ es una aplicación diferenciable $c: I \rightarrow \V$, de un intervalo abierto $I \subset \R$ en $\V$.  La restricción de $c$ a un intervalo compacto $[a,b]$ se denomina {\sf segmento} de la curva.  La imagen $c(I)$ del intervalo es un subconjunto de $\V$, llamado {\sf soporte} de la curva.
+
+\end{defi}
+
+\noindent{\bf Observaciones.}
+
+\begin{itemize}
+
+\item El intervalo $I$ puede ser finito o infinito y en general no necesitaremos decir de que tipo es el intervalo pues todos los cálculos que haremos serán de tipo local.
+
+\item  En general solemos identificar el concepto de curva, con el de subconjunto de $\V$.  Esto es un error, debido a que el mismo soporte (subconjunto de $\V$), puede provenir de distintas curvas.  Dos curvas con distintas parametrizaciones tienen el mismo soporte.  Pensando una curva como la trayectoria de una partícula, puede ocurrir que la misma trayectoria sea recorrida a distinta velocidad o incluso  que las partículas vayan en direcciones opuestas.
+
+Como norma  general todo lo que haremos dependerá de la parametrización de  la curva y no solo de su soporte.
+
+\item Una curva {\sf diferenciable a trozos} es una aplicación continua $c: I \rightarrow \V$ y que es diferenciable salvo en un número finito de puntos de $I$.
+
+\item La aplicación constante es también una curva, a pesar de que su soporte es solamente un punto.
+
+\item Si la imagen de una curva está contenida en un dominio coordenado, la expresión en coordenadas de una curva es $(c^1(t), \dots, c^n(t))$.
+
+\end{itemize}
+
+En general el soporte de una curva no es una subvariedad.  Sin embargo, es una subvariedad en casi todos los puntos.  De manera más precisa tenemos la siguiente 
+
+\begin{propo}
+
+Sea $c : I \rightarrow \V$ una curva y $t_0 \in I$.  Si $\dot c(t_0)\neq 0$, existe un intervalo $(t_0-\epsilon, t_0 +\epsilon)$ de tal forma que la curva restringida a dicho intervalo es una subvariedad.
+
+\end{propo}
+
+\dem
+
+Si $\dot c(t_0) \neq 0$, existe un intervalo $(t_0-\epsilon, t_0 +\epsilon)$ de tal forma que $\dot c(t) \neq 0$ si~$t$ está en el intervalo, debido a la continuidad de la derivada.  En dicho caso, $c$~es un aplicación cuya diferencial es inyectiva y por lo tanto la imagen es una subvariedad.  \fin
+
+
+
+\begin{defi}
+
+Una curva $c$ es {\sf regular} si $\dot c(t) \neq 0$ en todo punto.  Una curva es {\sf regular a trozos} si es continua en todo punto y es regular salvo en un número finito de puntos.
+
+\end{defi}
+
+\noindent{\bf Observación.}
+
+\smallskip
+
+Siempre que nos refiramos a una curva supondremos que ésta es regular o como mucho regular a trozos.  Esto no es una simplificación drástica, pues toda curva diferenciable o diferenciable a trozos admite una parametrización que cumple nuestra hipótesis.
+
+
+
+\begin{defi}
+
+Dada una curva $c: I \rightarrow \V$, un {\sf campo vectorial a lo largo de~$c$}, es una aplicación diferenciable $X: I\rightarrow T\V$ tal que $\pi \circ X= c$.
+El conjunto de campos a lo largo de $c$ se denotará $\campos (c)$.  
+
+\end{defi}
+
+Esta definición nos dice que $X(t)$ es un vector del espacio tangente a $\V$ en el punto $c(t)$.
+$$
+X_t= X(t) \in T_{c(t)} \V
+$$
+Sin embargo, en general, $X(t)$ no será tangente a la curva.
+
+\bigskip
+
+\noindent{\bf Ejemplos.}
+
+\begin{itemize}
+
+\item Si $c(I)$ está contenido en un abierto coordenado, todo campo $X$ sobre la curva se expresa, de modo único, como $X= x^i(t) \partial_i$, donde las funciones $x^i$ son diferenciables.
+
+\item  Dada una curva $c$, el campo tangente $t \rightarrow \dot c(t)$ es un campo a lo largo de $c$. Su expresión en coordenadas es $\dot c= \dot c^i(t)\partial_i$.
+
+\item  Dado un campo $X$ definido en $\V$, podemos considerarlo como un campo sobre cualquier curva.  Si $c : I \rightarrow \V$ es una curva, definimos $X: I \rightarrow \V$ mediante $X(t)=X_{c(t)}$, que está correctamente definido y es diferenciable. Si en coordenadas $X= x^i \partial_i$, entonces el campo restringido a la curva es $X= x^i(c(t))\partial_i$.  Un campo definido a lo largo una curva que sea la restricción de un campo definido globalmente se dice que es {\sf extensible}.  No todos los campos sobre curvas son extensibles, pues puede ocurrir que la curva no sea inyectiva.  Sin embargo, en el entorno de un punto regular de la curva, todo campo es extensible.
+
+\item  Sea $c$ una curva en $\R^n$.  La aceleración de $c$ es el campo $\ddot c(t)$.  Dicho campo se puede definir debido a que en $\R^n$ tenemos unas coordenadas globales canónicas, y lo que hacemos es derivar dos veces las funciones componentes.  Esto no es posible hacerlo en una variedad arbitraria.
+
+\item Se pueden definir los campos sobre curvas sin  necesidad de utilizar el fibrado tangente.    Un campo $X$ a lo largo de una curva $c$ es una función que asocia a cada elemento $t \in I$ un vector $X(t)\in T_{c(t)}(\V)$. El campo es diferencible si para toda función \mbox{$f \in C^\infty(\V)$} la función $t \rightarrow X_t(f)$ es diferenciable.  Del mismo modo se puede decir que $X$ es diferenciable si al escribirlo en coordenadas locales, las funciones componentes son diferenciables.  Este último razonamiento prueba la equivalencia de las dos definiciones dadas para los campos a lo largo de curvas.
+
+\end{itemize}
+
+
+\begin{propo}
+
+El conjunto $\campos(c)$ es un módulo sobre el anillo $C^\infty(I)$ con las operaciones:
+
+\begin{itemize}
+
+\item  $(f X) (t) = f(t) X(t)$
+
+\item $(X+Y)(t)=X(t)+Y(t)$
+
+\end{itemize}
+
+
+\end{propo}
+
+
+\dem
+
+Para cada $t \in I$ los vectores pertenecen al espacio vectorial $T_{c(t)} ( \V)$ y por lo tanto no hay problema al definir las operaciones. Las propiedades de la estructura de módulo, y la diferenciabilidad de los campos son claras.  \fin
+
+\begin{quote}
+
+\begin{pro}
+
+Definir el concepto de tensor con soporte en una curva y construir el álgebra tensorial asociada.
+
+\end{pro}
+
+\end{quote}
+
+
+
+
+\section{Derivada covariante sobre curvas}
+
+Sea $c: I \rightarrow \V$ una curva regular e $Y$ un campo vectorial definido globalmente.  Dado un punto $t_0\in I $ consideramos el vector $v=\dot c (t_0)$.  Con este vector podemos derivar covariantemente el campo $Y$.  Introducimos la notación
+$$
+D_tY(t_0) = \nabla_v Y
+$$
+El campo $D_tY$ es un campo definido únicamente sobre la curva.  Las siguientes propiedades son de demostración inmediata:
+
+\begin{itemize}
+
+\item  $D_t (\lambda Y + \mu W) = \lambda D_t Y + \mu D_t W$ para todo $\lambda, \mu \in \R$
+
+\item $D_t(fY) = \dot f Y + fD_tY$ donde $f$ se considera  restringida a la curva.
+
+\end{itemize}
+
+Si el campo $Y$ no está definido globalmente, sino que es un campo sobre la curva podemos intentar definir 
+$$
+D_t Y = D_t \widetilde Y
+$$
+donde $\widetilde Y$ es un campo global que extienda a $Y$.  Esta definición presenta varios problemas. Primeramente puede ocurrir que el campo $Y$ no sea globalmente extendible. Esto no es problemático, pues localmente siempre se puede extender (la curva es regular) y los cálculos que  efectuamos son siempre locales. El problema importante es la independencia de los cálculos de la extensión~$\widetilde Y$ que tomemos.  Esto se soluciona en la siguiente 
+
+\begin{propo}\label{propo:derivadacurva}
+
+Sea $c:I \rightarrow \V$ una curva regular.  El valor de $\nabla_{c(t_0)}Y$ depende únicamente del valor del campo $Y$ en un entorno $(t_0-\epsilon, t_0+\epsilon)$ de la curva.
+
+\end{propo}
+
+\dem
+
+Sin pérdida de generalidad podemos suponer que $c(t_0-\epsilon, t_0+\epsilon)$ está contenido en un abierto coordenado.  Localmente $Y= y^i\partial_i$. Por simplificar denotamos $v= \dot c (t_0)$.
+$$
+\nabla_v (Y)= \nabla_v(y^i \partial_i) = v(y^i)\partial_i +y_i\nabla_v(\partial_i)
+$$
+Esta expresión está evaluada en el punto $p=c(t_0)$.  El segundo sumando depende únicamente del valor de $y^i$ en el punto $p$, o lo que es lo mismo, de $y^i(c(t_0))$. 
+
+ Por definición
+$$v(f)= \frac{d}{dt} f(c(t))_{\mid t_0}
+$$
+y basta conocer el campo sobre la curva. \fin
+
+Si en un punto $t_0$ la curva es no regular no tenemos ninguno de estos problemas puesto que
+$$
+D_tY(t_0)= D_0Y =0  \text{ independientemente del campo } Y
+$$
+
+\bigskip
+
+Ya podemos derivar campos definidos sobre curvas.
+
+\begin{defi}
+
+Dada una curva regular a trozos $c: I \rightarrow \V$ llamamos {\sf derivada covariante sobre la curva} al operador
+$$
+D_t : \campos (c) \lto \campos(c)
+$$
+que hemos construido anteriormente.
+
+\end{defi}
+
+
+El operador $D_t$ cumple las siguientes  propiedades:
+
+
+\begin{itemize}
+
+\item  $D_t (\lambda Y + \mu W) = \lambda D_t Y + \mu D_t W$ para todo $\lambda, \mu \in \R$
+
+\item $D_t(fY) = \dot f Y + fD_tY$ donde $f:I \rightarrow \V$ es diferenciable.
+
+\item $D_tY(t_0)= \nabla_{\dot c (t_0)} \widetilde Y$ siendo $\widetilde Y$ una extensión arbitraria de $Y$.
+
+\end{itemize}
+
+Estas propiedades caracterizan totalmente al operador $D_t$, en el sentido de que dada una curva regular a trozos existe un único operador $D_t$ que cumple dichas propiedades.  En muchos libros se toman estas propiedades como axiomas para el operador $D_t$ y se llega a nuestros resultados.
+
+\begin{quote}
+
+\begin{pro}
+
+Demostrar que un operador que satisfaga estas tres propiedades es necesariamente un operador local.
+
+\end{pro}
+
+\end{quote}
+
+En la práctica se suele utilizar la expresión en coordenadas de este operador.  Se deduce fácilmente de la proposión  \ref{propo:derivadacurva}
+$$
+D_tY(t_0)= \left(\dot y^k (t_0) +y^j(t_0) \dot c^i(t_0)\Gamma_{ij}^k(c(t_0))\right)\partial_k
+$$
+
+\bigskip
+
+Siguiendo el proceso estandard, podemos extender $D_t$ a todo el álgebra tensorial.  Si denotamos por $\tau(c)$ al álgebra tensorial, existe una única aplicación 
+$$
+D_t: \tau(c) \lto \tau(c)
+$$
+que cumple:
+
+\begin{itemize}
+
+\item Sobre los campos coincide con el operador que hemos introducido.
+
+\item Sobre las funciones $D_tf= \frac{d}{dt}f= \dot f$.
+
+\item Conmuta con todas las  contracciones.
+
+\end{itemize}
+
+
+
+
+\bigskip
+
+\noindent{\bf Ejemplos.}
+
+\begin{itemize}
+
+\item Consideremos en $\R^n$ la conexión que en coordenadas cartesianas tiene todos los símbolos de Cristoffel nulos.  Dada una curva $c: I \rightarrow \R^n$ un campo $X$ sobre dicha curva se expresa como $X=x^i(t) \partial_i$. Tenemos entonces que
+$$
+D_tX= \dot x^i (t)\partial_i
+$$
+y la derivada covariante es simplemente la derivada respecto al tiempo.  Obsérvese que si tomamos unas coordenadas donde los símbolos de Cristoffel no son nulos el resultado anterior no es cierto.
+
+\item Dada la curva $c: I \rightarrow \R^n$ consideramos el campo $X= \dot c$.  La derivada covariante del campo de velocidades es el campo de aceleraciones.
+
+\item Si consideramos la curva $c^i = a_it+b_i$ (que es una recta recorrida a velocidad constante)  su aceleración es nula.  Recíprocamente, si una curva en $\R^n$ tiene aceleración nula entonces $\ddot c^i (t)=0$ y la curva es una recta parametrizada por una velocidad constante.  Este ejemplo coincide con la noción física de aceleración.
+
+\item Consideremos una circunferencia en $\R^2$ recorrida a velocidad constante. Por los resultados de física sabemos que solamente tiene aceleración normal y que dicha aceleración es perpendicular a la velocidad. Todos estos resultados se obtienen con el cálculo que hemos introducido.
+
+\end{itemize}
+
+A partir de una conexión en una variedad hemos podido definir la derivada covariante a lo largo de todas las curvas regulares a trozos. Recíprocamente, si sabemos derivar covariantemente a lo largo de todas las curvas, y se cumplen unas ciertas condiciones de compatibilidad, podemos recuperar la conexión definiendo
+$$
+(\nabla_XY)_p=\nabla_{X_p}Y=  D_t(0)Y
+$$
+donde hemos considerado una curva $c$ tal que $\dot c(0)=X_p$.
+
+
+\section{Campos paralelos}
+
+Una de las grandes ventajas que tiene $\R^n$ sobre las variedades generales es que dados dos puntos $p$ y $q$ de $\R^n$, sus espacios tangentes son canónicamente isomorfos.  Esto no es cierto en variedades arbitrarias.  Pero es más, en muchas variedades es imposible elegir un isomorfismo entre cualesquiera dos puntos, de tal forma que se respeten algunos principios básicos.  Lo que siempre es posible, una vez dada una conexión, es establecer un isomorfismo entre dos puntos unidos por una curva.  Pero en general el isomorfismo dependerá de la curva que tomemos y existen restricciones topólogicas que impiden mejorar este resultado.
+
+La técnica para identificar los espacios tangentes en dos puntos distintos consiste en trasladar paralelamente los vectores de un punto a otro siguiendo una curva.  
+
+\bigskip
+
+Denotamos por $X$ un campo definido sobre una curva $c$.
+
+\begin{defi}
+
+El campo $X$ es {\sf paralelo} a lo largo de $c$ si $D_t X=0$ en todos los puntos de la curva.
+
+\end{defi}
+
+Sea ahora $Y$ un campo definido globalmente de tal forma que al considerarlo como campo con soporte en cualquier curva es paralelo a lo largo de dicha curva.  Diremos en este caso que el campo $Y$ es {\sf paralelo}.  Como todo vector de $\V$ es el vector tangente de alguna curva, el campo $Y$ es paralelo si y solo si para todo campo $X$ se cumple $\nabla_X Y=0$.  Esto se expresa de un modo más sencillo con la fórmula $\nabla Y=0$.  Esta discusión conduce a la siguiente generalización.
+
+\begin{defi}
+
+Un  tensor $T$ es {\sf paralelo} si $\nabla T=0$.
+
+\end{defi}
+
+\noindent{\bf Ejemplos.}
+
+\begin{itemize}
+
+\item Dadas unas coordenadas cartesianas  en $\R^n$, los campos coordenados son campos paralelos. $\R^n$ posee una base global de campos paralelos.  Las variedades que cumplen esta propiedad (aunque los campos no sean coordenados) se dice que son {\sf paralelizables}.  No todas las variedades son paralelizables.
+
+\item En $\R^n$ un campo es paralelo si y solo si sus componentes en una base cartesiana son constantes.  Esto no es necesariamente cierto en otras coordenadas.  Como vemos las coordenadas cartesianas de $\R^n$ son en cierto modo unas coordenadas especiales.
+
+\item  Análogamente un tensor es paralelo si sus componentes son constantes (siempre en una base cartesiana).
+
+\end{itemize}
+
+Resulta que los campos paralelos están totalmente determinados por su valor en un único punto.  Este es el contenido del siguiente
+
+\begin{teo}
+
+Sea $c: I \rightarrow \V$ una curva, $t_0 \in I$ y $u \in T_{c(t_0)} \V$.  Existe un único campo $X$ definido a lo largo de $c$, que es paralelo y cumple $X(t_0)=u$.
+
+\end{teo}
+
+\dem
+
+Demostremos primeramente el teorema en un abierto coordenado que contenga al punto $c(t_0)$.  Escribimos en coordenadas el  vector  $u$ como  \mbox{$u= u^i \partial_i$}.  En un abierto coordenado un campo $X= x^i(t) \partial_i$ es paralelo si y solo si sus coordenadas cumplen la  ecuación diferencial
+$$
+\dot x^k(t) + x^j(t) \dot c^i (t) \Gamma_{ij}^k (c(t))=0
+$$
+que no es más que la expresión de $D_t X=0$ en coordenadas.
+
+Esta ecuación es de primer orden y lineal\footnote{Podemos escribir la ecuación en la forma
+$\dot x^k = A_j^kx^j$ donde $A_j^k=\dot c^i\Gamma_{ij}^k$.} 
+
+La teoría  de ecuaciones diferenciales ordinarias nos garantiza la existencia y unicidad de la solución que cumple las condiciones iniciales $x^i(t_0)= u^i$.  Al ser lineal el sistema, podemos asegurar que la solución es válida en todo el dominio coordenado.
+
+Recubriento el soporte de la curva por abiertos coordenados podemos ir extendiendo la definición del campo $X$ a toda la curva.  Simplemente debemos tener cuidado y elegir siempre las nuevas coordenadas de tal forma que cubran una parte más del soporte de la curva, lo cual es siempre posible. \fin
+
+Gracias a este teorema podemos ver que los espacios tangentes en cualesquiera dos puntos de la curva son isomorfos. La idea para establecer el isomorfismo es la siguiente:
+
+Sea $p=c(t_0)$ y $q=c(t_1)$ dos puntos unidos por una curva $c$.  Tomamos un vector $u$ en~$p$.  Construimos el campo paralelo a lo largo de la curva y que tiene como vector en~$p$ precisamente $u$.  Tomamos ahora el valor de dicho campo en el punto $q$.  Hemos definido de este modo una aplicación
+$$
+P_{t_0t_1} : T_p \V \lto T_q \V
+$$
+
+La linealidad de dicha operación es consecuencia de la linealidad de las ecuaciones.  Si $X$ es el campo paralelo que cumple $X_p=u$ y $X'$ es el campo paralelo que cumple $X'_p=u'$ entonces  $X+X'$ es el campo paralelo que cumple $(X+X')_p = u + u'$. Análogamente se procede con la multiplicación por escalares.
+
+La inyectividad deriva de que el campo nulo es evidentemente paralelo y cumple $X_p=0$.  Como estamos en dimensión finita y la aplicación es lineal  e inyectiva, es también epiyectiva.  
+
+\begin{defi}
+
+
+Sea $c: I \rightarrow \V$ una curva.  Para cada par de puntos $t_0,t_1 \in I$ tenemos un isomorfismo lineal
+$$
+P_{t_0t_1}: T_{c(t_0)} \V \lto T_{c(t_1)} \V
+$$
+llamado {\sf traslado paralelo} de $c(t_0)$ a $c(t_1)$.
+
+\end{defi}
+
+Las siguientes propiedades se deducen directamente de la construcción del transporte paralelo.
+
+\begin{itemize}
+
+\item $P_{t_0 t_0}= Id$
+
+\item $P_{t_1 t_2} \circ P_{t_0 t_1} = P_{t_0 t_2}$
+
+\item $P_{t_0 t_1} = (P_{t_1 t_0})^{-1}$
+
+\end{itemize}
+
+
+
+Gracias a  este isomorfismo podemos trasladar vectores a lo largo de la curva $c$.  Veamos que podemos reconstruir el concepto de derivada covariante a lo largo de $c$, usando el traslado paralelo.
+
+\begin{propo}\label{propo:trasladoparalelo}
+
+Se cumple
+$$
+D_t (X)(t_0)= \lim_{t\rightarrow t_0} \frac{(P_{t_0 t})^{-1} X(t)- X(t_0)}{t-t_0}
+$$
+
+\end{propo}
+
+
+\dem
+
+Sea $e_1, \dots, e_n$ una base  en un punto $p= c(t_0)$.  Sean $E_1, \dots, E_n$ los campos paralelos a lo largo de $c$ que son extensión de la base dada.  En todo punto los campos $E_1, \dots, E_n$ forman una base del espacio tangente.  Dado cualquier campo $X$ sobre la curva tenemos que $X=x^i(t) E_i$.  Derivamos covariantemente dicho campo y aplicamos que los $E_i$ son paralelos
+$$
+D_t (X) = \dot x^i E_i + x^i(t) D_t(E_i) = \dot x^i E_i
+$$
+Luego en dicha base las coordenadas de $D_t X$ son precisamente $\dot x_i(t)$.
+
+\smallskip
+
+Traslademos ahora paralelamente el vector $X(t)$ del punto $t$ al punto $t_0$.  Como $X = x^i(t) E_i$ y los $E_i$ son paralelos resulta que el vector trasladado es precisamente $x^i(t) E_i$.  Para calcular el límite, restamos y hacemos que $t$ tienda a $t_0$ y nos da como resultado $\dot x^i(t_0) E_i$, que coincide con la derivada covariante de $X$.  \fin
+
+
+Aplicando la proposición anterior vemos que conocido el traslado paralelo a lo largo de curvas, conocemos la derivada covariante a lo largo de curvas y conocido esto conocemos la conexión.
+
+\begin{quote}
+
+\begin{pro}
+
+El isomorfismo $P_{t_0 t_1}$ se  puede extender a las capas tensoriales.  Utilizar el límite dado en la proposición \ref{propo:trasladoparalelo}  para definir la derivada covariante de cualquier tensor.  Relacionar esto con los resultados ya conocidos.
+
+\end{pro}
+
+\end{quote}
+
+
+\section{Geodésicas}\label{sec:geodesicas}
+
+Las geodésicas de una variedad son la generalización de las lineas rectas de los espacios euclídeos. Existen dos propiedades geométricas que caracterizan a las lineas rectas de $\R^n$.
+
+La linea recta es la más corta entre todas las curvas que unen dos puntos.  Resolver el problema de encontrar curvas que satisfagan ciertas propiedades de mínimo es la tarea del cálculo de variaciones.  En efecto se pueden estudiar las geodésicas con métodos del cálculo de variaciones.  Sin embargo este método oscurece algunas propiedades geométricas que poseen la geodésicas y que son mucho más claras utilizando otra perspectiva.
+
+Otra característica que poseen las rectas es la de no tener aceleración (si están recorridas a velocidad constante).   A través de la derivada covariante podemos definir el concepto de aceleración de una curva y caracterizar a las geodésicas como curvas de aceleración nula.  Posteriormente veremos que las geodésicas son las curvas que hacen mínima la distancia entre dos puntos, aunque este resultado es cierto solo localmente. 
+
+\begin{defi}
+
+Dada una curva $c:I \rightarrow \V$, su {\sf aceleración} es $\ddot c= D_t \dot c$.  Una curva es una {\sf geodésica} si su aceleración es nula en todo punto.
+
+\end{defi}
+
+\noindent{\bf Ejemplos.}
+
+\begin{itemize}
+
+\item  Consideramos en $\R^n$ la curva dada en coordenadas cartesianas $c(t) = \{c^i(t)\}$.  El vector velocidad es $\dot c(t) = \{\dot c^i(t)\}$ y la aceleración es $\ddot c(t) = \{\ddot c^i(t)\}$, que coincide con el concepto de aceleración de una partícula que se estudia en física.
+
+
+\item Una curva de $\R^n$ es geodésica si $\ddot c^i(t)=0$ para todo $i$.  Resolviendo la ecuación diferencial obtenemos $c^i(t) = a_it +b_i$.  Por lo tanto las goedésicas de $\R^n$ son precisamente las lineas rectas recorridas a velocidad constante.
+
+\item  Es importante notar que la parametrización en una geodésica es fundadmental.  Si cambiamos el paramétro puede ocurrir que la nueva curva no sea una geodésica (Considérese en $\R^2$ la curva $(t^3,t^3)$ dada en coordenadas cartesianas).
+
+
+\end{itemize}
+
+El método habitual para encontrar las geodésicas es utilizar coordenadas locales, escribir en estas coordenadas que la aceleración es nula y resolver las ecuaciones diferenciales a las que esta condición da lugar.  Existe otra forma de atacar el problema que no hace uso de coordenadas y es por tanto intrínseca.  Veremos esto posteriormente, al estudiar el flujo geodésico.
+
+\begin{teo}[Existencia y unicidad]\label{teo:geodesica}
+
+Sea $\V$ una variedad con una conexión $\nabla$.  Dado un punto $p \in \V$ y un vector tangente  $X_p \in T_p \V$, existe una geodésica $\gamma:(-\epsilon, \epsilon) \rightarrow \V$ que cumple $\gamma(0) = p$, $ \dot \gamma(0) = X_p$.  Dicha geodésica es única en un entorno del cero.
+
+\end{teo}
+
+\dem
+
+Como se trata de un problema local, podemos restringirnos a un abierto coordenado.   La ecuación $D_t \dot c =0$ se escribe en coordenadas locales \label{geodesica}
+$$
+\ddot x^k(t) + \dot x^i(t) \dot x^j(t) \Gamma_{ij}^k(x(t))=0
+$$
+
+Esta es una ecuación diferencial de segundo orden.  Utilizamos un argumento clásico para transformar esta ecuación de segundo orden en una de primer orden, pero con un número doble de variables.
+
+Para ellos introducimos nuevas variables $q^i= \dot x^i$ y escribimos el sistema anterior como
+\begin{eqnarray*}
+\dot x^i(t) & =& q^i(t)\\ 
+\dot q^k (t) &= &- q^i(t) q^j(t) \Gamma_{ij}^k(x(t)) 
+\end{eqnarray*}
+
+
+Este sistema de ecuaciones diferenciales se puede interpretar como un campo vectorial en la variedad $U \times \R^n$ (dotada de coordenadas $(x^i, q^i)$). 
+
+Analicemos un poco más la forma que tienen las soluciones de este campo.  El sistemas tiene en total $2n$ ecuaciones.  Si escribimos en coordenadas una solución
+$$
+c(t) = (c^1(t), \dots, c^n(t), c^{n+1}(t), \dots , c^{2n}(t))
+$$
+en virtud de las $n$ primeras ecuaciones obtenemos $c_{n+i}= \dot c_i(t)$.  Por lo tanto en los sistemas de primer grado obtenidos por este procedimiento siempre se cumple que la solución es de la forma $(c(t), \dot c(t))$, donde $c$ es una curva en $U$.
+
+ El teorema de existencia y unicidad de ecuaciones diferenciales ordinarias nos dice que fijados $(p,X_p)\in U \times \R^n$, existe una única curva
+$$
+c:(-\epsilon, \epsilon) \lto U \times \R^n
+$$
+que cumple la ecuación diferencial y verifica además $c(0) = (p, X_p)$.  La curva~$c$ tiene como imagen un conjunto del espacio producto $U \times \R^n$.  Quedándonos con las primeras $n$ coordenadas obtenemos una curva 
+$$
+\gamma: (-\epsilon, \epsilon) \lto U
+$$
+que cumple las condiciones $\gamma(0)= p$ y $\dot \gamma(0)= X_p$.
+
+La unicidad se obtiene con el siguiente argumento.  Si $\gamma$ y $\gamma'$ cumplen las condiciones, entonces las curvas $c= (\gamma, \dot \gamma) $ y $ c'= (\gamma', \dot \gamma')$ cumplirían el sistema de ecuaciones diferenciales de primer orden.  Como tienen las mismas condiciones iniciales, $c= c'$ en su dominio de definición.  \fin
+
+Este teorema demeuestra la existencia y unicidad de las geodésicas en un dominio coordenado.  Si la geodésica se puede prolongar a un intervalo $I$ que contenga a $ (-\epsilon, \epsilon)$, necesariamente debe coincidir con ella en un entorno del cero.
+
+Introduciendo si es necesario más abiertos coordenados se puede ver que si dos geodésicas satisfacen las mismas condiciones iniciales, necesariamente coinciden en su dominio de definición.  Sea $I$ la unión de todos los intervalos donde se pueden definir geodésicas que cumplan las condiciones iniciales.  Podemos definir una curva con dominio en $I$  de tal forma que sea imposible prolongarla satisfaciendo la ecuación diferencial y las condiciones iniciales.
+
+\begin{defi}
+
+Sea $X$ un vector tangente en $p$.  Denotamos por $\gamma_X: I\rightarrow \V$ la {\sf geodésica maximal} que verifica $\gamma_X(0)=p$ y $\dot \gamma_X(0)= X$.
+
+\end{defi}
+
+La interpretación física de una geodésica es una particula libre que se mueve en la variedad $ \V$.  El vector $X$ es la velocidad de la partícula y el paramétro es el tiempo.  Sabemos que para cualquier velocidad $X$, las geodésicas existen al menos un tiempo $\epsilon$.  Si bajamos la velocidad, como la partícula recorrerá la misma trayectoria, el tiempo de definición aumenta.  Bajando la velocidad es posible que el tiempo sea tan grande como queramos.  En particular el tiempo de definición puede ser mayor que $1$. Traduciremos estas motivaciones físicas a resultados matemáticos.
+
+\begin{propo}
+
+Sea $\gamma: I \rightarrow\V$ la geodésica maximal que cumple $\gamma(0)=p$ y $\dot \gamma (0) = X_p$.  Sea $\alpha(t) = \gamma(\lambda t)$, definida en un intervalo dependiente de $I$ y de $\lambda$.  Entonces $\alpha$ es una geodésica que cumple $\alpha(0)=p$ y $\dot \alpha (0) = \lambda X_p$.
+
+\end{propo}
+
+\dem
+
+Evidentemente se cumple $\alpha(0)=p$ y $\dot \alpha (0) = \lambda X$. Veamos que es geodésica.  Calculamos la derivada covariante a lo largo de $\alpha$  Debemos notar que el vector tangente de $\alpha$ es precisamente $\lambda \dot \gamma_X$, aplicando la regla de la cadena.  Teniendo en cuenta esto
+$$
+D_t\dot \alpha = \nabla_{\dot \alpha} \dot \alpha = \nabla_{\lambda \dot \gamma} \lambda \dot \gamma= \lambda^2 \nabla_{\dot \gamma} \dot \gamma =0
+$$
+lo que prueba que es geodésica.
+
+El dominio de definición de $\alpha$ consta de aquellos valores de $t$ para los cuales $\lambda t \in I$.  Además esta geodésica es maximal.  \fin
+
+Si  la curva $\alpha $ cumple $\alpha(0)=p$ y $\dot \alpha(0)= \lambda X$ y es geodésica, su notación habitual debe ser $\gamma_{\lambda X}$.  Con esta notaciones tenemos.
+
+\begin{cor}
+
+Se cumple $\gamma_X (\lambda t) = \gamma_{\lambda X} (t)$
+
+\end{cor}
+
+\begin{defi}
+
+Decimos que una geodésica es {\sf completa} si su intervalo de definición es todo $\R$.
+
+\end{defi}
+
+\noindent{\bf Ejemplos.}
+
+\begin{itemize}
+
+\item  Sea la variedad $\R^n$ con su estructura habitual.  Como punto, y para simplificar los cálculos, tomaremos $p=0$.  Si $v= (v^1, \dots, v^n)$ entonces
+$$
+\gamma_v(t) = (v^1 t, \dots, v^n t)
+$$
+y su intervalo de definición es todo $\R$ (la geodésica es completa)
+
+\item  Consideramos la variedad obtenida de $\R^2$ al quitarle el punto $(1,1)$.  Como en el ejemplo anterior $p=0$.  La geodésica de vector $v= (1,1)$ es $(t,t)$.  Sin embargo su intervalo de difinición es $(-\infty, 1)$, debido a que hemos retirado el punto.  Esta geodésica no es completa.
+
+\item Consideremos la bola abierta de radio $1$ en $\R^n$.  Para cualquier vector tangente en cero, su geodésica asociada no está definida en todo $\R$.  Ello es debido a que en un tiempo lo suficientemente largo, todas las partículas consiguen escapar de la bola.
+
+\item  Sea $\V= S^n$ con la conexión $\nabla^\intercal$.  Dado un punto $p \in S^n$ y $0 \neq v \in T_p\V$ sea la curva
+$$
+\gamma(t) = \cos (\abs{v} t) p + \sen (\abs{v} t) \frac{v}{\abs{v}}
+$$
+Tenemos que $\gamma(0)=p$ y $\dot \gamma (0) = v$.  Además dicha curva es geodésica, pues su aceleración (en $\R^{n+1}$) es perpendicular a la esfera. Todas las geodésicas de $S^n$ son de esta forma.  Esta curva es un arco máximo de la esfera y está definida para cualquier valor de~$t$.  Esta curva no es inyectiva, sino que es periodica.
+
+\item  Consideramos la esfera $S^2$ a la que se le ha quitado el polo sur.  Las geodésicas que parten del polo norte no pueden estar definidas para un intervalo de tiempo infinito.
+
+\end{itemize}
+
+
+\section{Torsión}
+
+La aplicación $\nabla: \campos(\V)\times \campos(\V) \rightarrow \campos(\V)$ no es un tensor, debido a que en la segunda componente no es lineal.  Sin embargo a partir de $\nabla$ se pueden construir una serie de tensores.  El que nosotros estudiaremos en esta sección es el tensor de torsión.
+
+\begin{defi}
+
+Llamamos {\sf torsión} a la aplicación 
+$$
+\Tor (X,Y)= \nabla_X Y-\nabla_Y X -[X,Y]
+$$
+
+\end{defi}
+
+\begin{quote}
+
+\begin{pro}
+
+Demostrar que $\Tor(X,Y)$ es una aplicación bilineal sobre el anillo de funciones.  Además $\Tor$ es antisimétrico.  Esto, se cumple $\Tor(X,X)=0$ y $\Tor (X,Y)=-\Tor (Y,X)$.
+
+\end{pro}
+
+\end{quote}
+
+  El {\sf tensor de torsión} es una aplicación bilineal
+$$
+\Tor: \campos (\V) \times \campos(\V) \lto \campos(\V)
+$$
+
+Una aplicación de este tipo se puede entender como un tensor de tipo $(2,1)$.  Para ello definimos
+$$
+\Tor (X,Y,\omega)=\omega (\Tor (X,Y))
+$$
+
+\begin{defi}
+
+Una conexión es {\sf simétrica},  si su tensor de torsión es nulo.
+
+\end{defi}
+
+\begin{quote}
+
+\begin{pro}
+
+Demostrar que la definición $T(X,Y)= \nabla_X Y - \nabla_Y X$ no da lugar a un tensor.  Justificar la aparición del término $[X,Y]$ en la definición para dotar de carácter tensorial a la aplicación.
+
+\end{pro}
+
+\end{quote}
+
+En general podemos escribir el tensor $\Tor$ en cualquier base de campos.  Sin embargo, y debido a que el corchete de campos coordenados es nulo, vamos a escribir dicho tensor en la base $\partial_i$.
+$$
+\Tor(\partial_i,\partial_j) = \nabla_{\partial_i} \partial_j - \nabla_{\partial_j} \partial_i -[\partial_i,\partial_j]= (\Gamma_{ij}^k -\Gamma_{ji}^k) \partial_k
+$$
+La torsión nula implica que los coeficientes de Cristoffel en una base coordenada son simétricos en los índices $i,j$.  Sin embargo debemos hacer notar que en bases que no sean coordenadas esto no tiene por qué ser cierto, debido a que el paréntesis de los campos puede no ser nulo.
+
+El recíproco de la afirmación anterior también es cierto.  Si la conexión tiene coeficientes de Cristoffel que son simétricos en una colección de cartas que recubren toda la variedad, la torsión de dicha variedad es nula.
+
+\begin{quote}
+
+\begin{pro}
+
+La conexión estandard de $\R^n$ es simétrica y las que induce en las subvariedades también son simétricas.
+
+\end{pro}
+
+\end{quote}
+
+\begin{quote}
+
+\begin{pro}
+
+Si la conexión es simétrica, el hessiano de toda función es un tensor simétrico.  El recíproco también es cierto.
+
+\end{pro}
+
+\end{quote}
+
+\begin{quote}
+
+\begin{pro}
+
+Dada una conexión $\nabla$, denotamos  por $Tor$ a su torsión.  Entonces 
+$$
+\nabla'_XY= \nabla_XY + Tor(X,Y)
+$$
+define una nueva conexión en la variedad.  Calcular la torsión de esta nueva conexión.  Calcular también sus símbolos de Cristoffel.
+
+
+\end{pro}
+
+\end{quote}
+
+\begin{quote}
+
+\begin{pro}
+
+Sea $\nabla$ una conexión de torsión nula.  Entonces para toda forma $\omega$ de grado uno 
+$$
+d\omega (X,Y)= (\nabla_X\omega)Y-(\nabla_YX \omega)X
+$$
+{\bf Indicación.} Utilizar la fórmula de Cartan 
+$$
+d\omega(X,Y)= X(\omega(Y))-Y(\omega(X)-\omega([X,Y])
+$$
+
+
+
+\end{pro}
+
+\end{quote}
+
+
+\section{Tensor diferencia de conexiones}
+
+Normalmente al estudiar conexiones en variedades lo que nos interesa son las geodésicas.  Ocurre que distintas conexiones pueden darnos las mismas geodésicas.  Podemos considerar equivalentes entonces dos conexiones si y solo si tienen las mismas geodésicas.  Resulta que en cada clase de equivalencia existe un único representante de torsión nula.
+
+Para estudiar todos estos problemas introducimos el tensor diferencia de conexiones.
+
+\begin{propo}
+
+Sea $\V$ una variedad y $\nabla$ y $\nabla'$  dos conexiones lineales en dicha variedad.  La aplicación
+$$
+\begin{array}{lccc}
+D: & \campos (\V)\times \campos(\V)& \lto & \campos (\V) \\
+    & (X,Y) & \lto & \nabla_XY -\nabla'_XY
+\end{array}      
+$$
+es bilineal sobre el anillo de funciones.
+
+\end{propo}
+
+\dem
+
+La linealidad en la primera componente es clara, así como la aditividad en la segunda.  Veamos que ocurre al multiplicar la segunda componente por una función
+\begin{equation*}
+\begin{split}D(X,fY) = \nabla_X(fY) - \nabla'_X(fY) = \\ 
+X(f) Y+ f\nabla_X Y - X(f) Y - f \nabla'_X Y = \\ 
+f(\nabla_X Y - \nabla'_XY) = f D(X,Y)
+\end{split}
+\end{equation*}
+
+De este modo hemos comprobado que $D$ es un tensor de tipo $(2,1)$. \fin
+
+\begin{defi}
+
+Dadas dos conexiones $\nabla$ y $\nabla'$ sobre $\V$, el tensor  $D$ construido anteriormente se denomina {\sf tensor diferencia de conexiones}.
+
+\end{defi}
+
+\begin{quote}
+
+\begin{pro}
+
+Calcular $D$ en coordenadas.
+
+\end{pro}
+
+\end{quote}
+
+
+\begin{quote}
+
+\begin{pro}
+
+Sea $\V$ una variedad y $\nabla$ una conexión.  Dada una aplicación bilineal 
+$ D: \campos (\V) \times \campos (\V) \rightarrow \campos(\V)$ la aplicación $\nabla+ D$ es una conexión lineal en  $\V$.  Todas la conexiones de $\V$ se obtienen de ese modo.
+
+\end{pro}
+
+\end{quote}
+
+La aplicación bilineal $D$ se puede descomponer de modo canónico en suma de una parte simétrica y otra parte antisimétrica dando lugar a nuevos tensores. Si
+$$
+A(X,Y) = \frac{1}{2} (D(X,Y)- D(Y,X))
+$$
+$$
+S(X,Y) = \frac{1}{2} (D(X,Y)+ D(Y,X))
+$$
+obviamente tenemos $D=A+S$.
+
+\begin{propo}\label{propo:torsion}
+
+Denotamos por $\Tor$ y $\Tor'$  los tensores de torsión de las conexiones $\nabla$ y $\nabla'$.  Entonces $2A= \Tor'-\Tor$
+
+\end{propo}
+
+\dem
+
+Tenemos las siguientes igualdades
+\begin{eqnarray*}
+\Tor (X,Y )& = & \nabla_X Y - \nabla_Y X - [X,Y]\\ 
+\Tor' (X,Y )& = & \nabla'_X Y - \nabla'_Y X - [X,Y]
+\end{eqnarray*}
+Restándolas se obtiene el resultado.  \fin
+
+La parte antisimétrica de $D$ solamente depende entonces de los tensores de torsión.  Recordemos además que un tensor $T$ es antisimétrico si y solo si cumple $T(X,X)=0$.
+
+\begin{teo}
+
+Son equivalentes las siguientes condiciones:
+
+\begin{itemize}
+
+\item Las conexiones $\nabla$ y $\nabla'$ tienen las mismas geodésicas (con la misma parametrización).
+
+\item $D$ es antisimétrico.
+
+\end{itemize}
+
+\end{teo}
+
+\dem
+
+Debemos comprobar que $D(X,X)=0$ en todo punto.  Para ello tomamos un punto $p$ y calculamos $D(X_p,X_p)$.  Para realizar el cálculo debemos considerar un campo $\widetilde{X}$ definido globalmente o definido a lo largo de  una curva, de tal forma que $\widetilde{X}_p= X_p$.  En principio parece que el resultado depende del campo $\widetilde{X}$.  Sin embargo, debido al carácter tensorial, resulta que el cálculo es independiente de la extensión elegida.
+
+Sea ahora $\gamma$ la geodésica que cumple $\gamma(0)=p$ y $\dot \gamma (0)= X_p$.  Consideramos $\widetilde{X}$ como el campo paralelo (con la conexión $\nabla$) que extiende a $X_p$.  Entonces $\nabla_{X_p} \widetilde{X}=0$ puesto que la curva es una geodésica.  Análogamente se procede con la otra parte y se demuestra que $D(X_p,X_p)=0$.
+
+\bigskip
+
+Demostremos ahora el recíproco. Tenemos ahora que $\nabla'= \nabla + D$.  Apli\-cán\-dolo a dos campos iguales 
+$$
+\nabla'_X X = \nabla_X X + D(X,X) = \nabla_X X
+$$
+Sea $\gamma$ una geodésica de la conexión $\nabla$.  Esto equivale a que $\nabla_{\dot \gamma} \dot \gamma=0$.  Pero entonces $\nabla'_{\dot \gamma} \dot \gamma=0$ y $\gamma$ es también geodésica de la otra conexión.  \fin
+
+\begin{cor}\label{cor:torsion}
+
+Las conexiones $\nabla$ y $\nabla'$ son iguales si y solo si tienen las mismas geodésicas y la misma torsión.
+
+\end{cor}
+
+\dem
+
+Si tienen las mismas geodésicas, el tensor $D$ es antisimétrico y si  tienen la misma torsión $D$ es nulo por la proposición \ref{propo:torsion}. \fin
+
+
+\begin{defi}
+
+Dos conexiones sobre $\V$ son {\sf equivalentes} si tienen las mismas geodésicas.
+
+\end{defi}
+
+\begin{quote}
+
+\begin{pro}
+
+Dos conexiones son equivalentes si $D$ es antisimétrico.
+
+\end{pro}
+
+\end{quote}
+
+\begin{propo}
+
+En cada clase de equivalencia existe una única conexión de torsión nula.
+
+\end{propo}
+
+\dem
+
+El corolario \ref{cor:torsion} prueba la unicidad.  Para ver la existencia, tomamos un representante cualquiera y definimos una nueva conexión
+$$
+\nabla_X Y = \nabla' _X Y - \frac{1}{2} \Tor'(X,Y)
+$$
+La conexión $\nabla$ cumple el enunciado.  \fin
+
+
+\noindent{\bf Observación.}
+
+\smallskip
+
+Decimos que dos conexiones son {\sf proyectivamente equivalentes} si  tienen las mismas geodésicas, aunque posiblemente con parametrizaciones distintas.  El siguiente resultado se debe a H. Weyl (ver \cite{spiaco}, pág 273).
+
+\begin{quote}
+
+Dos conexiones son proyectivamente equivalentes si y solo si existe una forma diferencial $\omega$ que cumple
+$$
+S(X,Y)= \omega(X)Y+ \omega(Y)X
+$$
+
+\end{quote}
+
+
+\section{Conexión de Levi-Civita}
+
+
+En una variedad arbitraria sabemos que existen muchas conexiones, pero no existe ninguna que destaque sobre las demás.  Sin embargo si introducimos alguna estructura suplementaria en la variedad puede que existan conexiones cuyas propiedades se adapten mejor a dicha estructura.  En el caso particular de las variedades riemannianas existe una conexión privilegiada.  Es la conocida como conexión de Levi-Civita\footnote{También llamada conexión riemanniana} y que se caracteriza por ser de torsión nula y tener al tensor $g$ como tensor paralelo.
+
+El teorema principal de esta sección es el que afirma la existencia y unicidad de dicha conexión.  Existen dos enfoques en la demostración de este teorema.  Uno de ellos permite calcular, basándonos en las propiedades de la conexión, los símbolos de Cristoffel en cada abierto coordenado.  La fórmula prueba que estos coeficientes son únicos y por lo tanto que la conexión existe y es única, puesto que en las intersecciones de las cartas locales necesariamente deben coincidir.
+
+Nosotros seguiremos otro enfoque, más algebraico y general, que nos permitirá dar una fórmula independiente de las coordenadas para la conexión de Levi-Civita.  Como corolario obtendremos las expresiones de los símbolos de Cristoffel en función de la métrica.
+
+\begin{defi}
+
+Sea $(\V,g)$ una variedad riemanniana.  Una conexión $\nabla$  es {\sf compatible con la métrica} si $\nabla(g)=0$.
+
+\end{defi}
+
+ Utilicemos la definición de derivada covariante para obtener una fórmula que utilizaremos en el teorema fundamental.  De paso dicha fórmula nos sirve para dar una nueva definición de conexión compatible con la métrica.
+
+Aplicamos $\nabla (g)$ a tres campos vectoriales y utilizamos la definición
+$$
+(\nabla g) (Y_1,Y_2,X)= (\nabla_X g)(Y_1, Y_2)= X\escalar{Y_1}{Y_2} -\escalar{\nabla_X Y_1}{Y_2} - \escalar{Y_1}{\nabla_XY_2}
+$$
+
+Como la conexión es compatible, esta última expresión debe ser nula.  La implicación inversa consiste en leer la demostración de abajo hacia arriba.  Hemos demostrado la
+
+\begin{propo}
+
+Una conexión $\nabla$ es compatible con la métrica si y solo si se cumple
+$$
+ X\escalar{Y_1}{Y_2} =\escalar{\nabla_X Y_1}{Y_2} + \escalar{Y_1}{\nabla_XY_2}
+ $$
+ para cualesquiera campos.
+ 
+ \end{propo}
+ 
+Hemos dado una nueva definición de conexión compatible con la métrica, que es la que habitualmente se emplea en muchos libros, debido a que no requiere el concepto de derivada covariante de tensores y solamente emplea la derivada covariante de campos.
+ 
+ \begin{quote}
+ 
+ \begin{pro}
+ 
+ La conexión estandard de $\R^n$ es compatible con el  producto escalar habitual de $\R^n$.  Probar que existen otras métricas cuya conexión de Levi-Civita es la conexión estandard de $\R^n$.
+ 
+ \end{pro}
+ 
+ \end{quote}
+ 
+ \begin{quote}
+ 
+ \begin{pro}
+ 
+ Dada una subvariedad $\V \subset \R^n$ la conexión $\nabla^\intercal$ es compatible con la  métrica heredada de $\R^n$.
+ 
+ \end{pro}
+ 
+ \end{quote}
+ 
+ Existen todavia más definiciones distintas de conexión compatible.  Para ello ciertas propiedades deben verificarse para todas las curvas posibles de la variedad.  Generalmente nosotros emplearemos dichas definiciones como propiedades de la conexión y no  es necesario que probemos su equivalencia, sino solamente la implicación directa.
+ 
+ \begin{propo}
+ 
+ Sea $\nabla$ una conexión compatible con la métrica en $\V$ y $c$ una curva arbitraria.  Son ciertos los siguientes resultados:
+ 
+ \begin{enumerate}[\indent 1.- ]
+ 
+ \item Si $Y$ e $Y'$ son dos campos a lo largo de $c$ entonces
+ $$
+ \frac{d}{dt} \escalar{Y}{Y'} = \escalar{D_tY}{Y'}+ \escalar{Y}{D_t Y'}
+ $$
+ 
+ \item Si $Y$ e $Y'$ son paralelos a lo largo de $c$ entonces $\escalar{Y}{Y'}$ es una función constante.
+ 
+ \item  El traslado paralelo entre dos puntos cualesquiera de la curva es una isometría.
+ 
+ \end{enumerate}
+ 
+ \end{propo}
+ 
+ \dem
+ 
+ {\it 1.-} Sabemos que $\nabla_X \escalar{Y}{Y'}= \escalar{\nabla_X Y}{Y'}+ \escalar{Y}{\nabla_X Y'}$.  Tomando $X= \dot c$ tenemos la expresión buscada\footnote{Para no complicarnos la vida introduciendo coordenadas y oscureciendo la razón fundamental de la demostración, supongamos que los campos se pueden extender y podemos utilizar la definición de derivada covariante dada por la propiedad $D_t(Y) = \nabla_{\dot c} (\widetilde{Y})$}, pues sobre las funciones dicho campo es la derivada respecto al tiempo.
+ 
+ \smallskip
+ 
+ {\it 2.-}  Inmediato si se admite el resultado anterior.
+ 
+ 
+ \smallskip
+ 
+ {\it 3.-} Los campos paralelos tienen producto constante.  Luego en cada punto el producto escalar de dichos campos es el mismo.  Pero esto es equivalente a decir que el traslado paralelo es una isometría. \fin
+ 
+ Como hemos dicho, las implicaciones inversas también ciertas, siempre y cuando las propiedades se cumplan sobre todas las curvas.
+
+
+\begin{lema}
+
+Si $\escalar{X}{Y}=0$ para todo campo $Y$, entonces $X$ es nulo.
+
+
+\end{lema}
+
+
+
+\dem
+
+Dado $X_p$ e $Y_p$ existen campos que los extienden. Entonces
+$$
+\escalar{X_p}{Y_p}= (\escalar{ X}{ Y})_p=0
+$$
+Como la métrica es no degenerada, tenemos que $X_p=0$. \fin
+
+\begin{cor}
+
+Si conocemos $\escalar{X}{Y}$ para todo campo $Y$, conocemos $X$.
+
+\end{cor}
+
+
+\begin{teo}[Fundamental]
+
+En toda variedad riemanniana $(\V,g)$ existe una única conexión $\nabla$  que cumple:
+
+\begin{itemize}
+
+\item Es compatible con la métrica.
+
+\item Es simétrica:  $\nabla_XY-\nabla_YX= [X,Y]$ 
+
+\end{itemize}
+
+Esta es la {\sf conexión riemanniana} o {\sf conexión de Levi-Civita}.
+
+\end{teo}
+
+\dem
+
+Las dos condiciones se traducen en las siguientes identidades:
+
+$$
+\nabla_X Y - \nabla_Y X= [X,Y]
+$$
+$$
+X\escalar{Y}{Z} =\escalar{\nabla_X Y}{Z} + \escalar{Y}{\nabla_XZ}
+$$
+Utilizando estas fórmulas probemos la unicidad de la conexión de Levi-Civita. La solución que obtendremos será el único candidato a la solución del problema.
+
+Permutando cíclicamente los campos:
+\begin{eqnarray*}
+X\escalar{Y}{Z} &=&\escalar{\nabla_X Y}{Z} + \escalar{Y}{\nabla_Z X}+ \escalar{Y}{[X,Z]}\\
+Y\escalar{Z}{X} &=&\escalar{\nabla_Y Z}{X} + \escalar{Z}{\nabla_X Y}+ \escalar{Z}{[Y,X]}\\
+Z\escalar{X}{Y} &=&\escalar{\nabla_Z X}{Y} + \escalar{X}{\nabla_Y Z}+ \escalar{X}{[Z,Y]}
+\end{eqnarray*}
+Sumando las dos primeras ecuaciones y restando la última obtenemos
+\begin{equation*}
+\begin{split}
+X\escalar{Y}{Z} + Y \escalar{Z}{X}- Z\escalar{X}{Y} = \\ 
+2 \escalar{\nabla_X Y}{Z} + \escalar{Y}{[X,Z]}+ \escalar{Z}{[Y,X]} - \escalar{X}{[Z,Y]}
+\end{split}
+\end{equation*}
+
+Despejando $\escalar{\nabla_X Y}{Z}$ en dicha ecuación tenemos
+\begin{equation}\nonumber
+\begin{split}
+\escalar{\nabla_X Y}{Z}= \frac{1}{2}\bigg(X(\escalar{Y}{Z}) + Y (\escalar{Z}{X})- Z(\escalar{X}{Y}) \\ \nonumber
+- \escalar{Y}{[X,Z]}- \escalar{Z}{[Y,X]} + \escalar{X}{[Z,Y]}\bigg)
+\end{split}
+\end{equation}
+lo que prueba su unicidad en virtud del corolario anterior.
+
+Utilizamos esta fórmula para definir la conexión . \guillemotleft Sólamente\guillemotright\  queda probar que en efecto con esta fórmula obtenemos una conexión, que es métrica y que su torsión es nula.  \fin
+
+Aplicando esta construcción a bases coordenadas obtenemos los símbolos de Cristoffel:
+$$
+\escalar{\nabla_{\partial_i}\partial_j} {\partial_k}=\frac{1}{2}(\partial_i g_{jk}+\partial_j g_{ik}-\partial_k g_{ij})
+$$
+Por otra parte
+$$
+\escalar{\nabla_{\partial_i}\partial_j} {\partial_k}= \escalar{\Gamma_{ij}^h \partial_h}{\partial_k}= \Gamma_{ij}^h g_{hk}
+$$
+Para despejar en la ecuación
+$$
+g_{hk}\Gamma_{ij}^h =\frac{1}{2}(\partial_i g_{jk}+\partial_j g_{ik}-\partial_k g_{ij})
+$$
+subimos un índice y obtenemos
+$$
+\Gamma_{ij}^h = \frac{1}{2}g^{hk}(\partial_i g_{jk}+\partial_j g_{ik}-\partial_k g_{ij})
+$$
+
+\section{Flujo geodésico}
+
+Basándonos en los cálculos locales efectuados en el teorema de existencia y unicidad de las geodésicas, vamos a definir un campo en fibrado tangente.  Las curvas integrales de este campo, tras proyectarlas en la variedad, serán las geodésicas de la conexión.  En el caso riemanniano, que es el que a nosotros nos interesa, existe una construcción elegante e intrínseca de dicha campo.  
+
+\bigskip
+
+  Dado un  vector tangente $X $ existe una única geodésica tal que  \mbox{$\dot \gamma (0)=X$}.  Para construir dicha geodésica considerabamos un sistema de ecuaciones diferenciales de primer orden, doblando el número de variables y finalmente tomabamos las primeras $n$ coordenadas de la curva solución.
+
+Dada una curva $c: I \rightarrow \V$, podemos construir otra, $\tilde c: I \rightarrow T\V$ mediante la fórmula
+$$
+\tilde c (t) = (c(t), \dot c (t))
+$$
+
+Decimos que $\tilde c$ es el {\sf levantamiento horizontal} de la curva $c$ al fibrado tangente.  Dicha curva es diferenciable si $c$ lo es.  
+
+ Sea $\gamma:I \rightarrow \V$ la geodésica que cumple $\gamma(0)=p$ y $\dot \gamma(0) = X$.  La curva $\tilde \gamma$ cumple $\tilde \gamma(0) = (p, X)$.  Si otra geodésica $\gamma'$ cumple lo mismo, necesariamente $\tilde \gamma$ y $\tilde \gamma'$ coinciden en un entorno del cero.  Derivando la función $\tilde \gamma$ en el punto cero, obtenemos un vector tangente en el punto $(p,X) \in T\V$.  Este cálculo es independiente de la curva, pues las curvas que hemos tomado (levantamientos de geodésicas) coinciden en entornos del cero.
+
+Hemos visto que este razonamiento se puede realizar en todo punto de $T\V$, obteniendose de este modo un campo vectorial $G$ sobre $T\V$.
+
+\begin{defi}
+
+El campo $G$ construido anteriormente se denomina {\sf campo geodésico} de la conexión $\nabla$.  El grupo uniparamétrico asociado se denomina {\sf flujo geodésico}.
+
+\end{defi}
+
+\noindent{\bf Observaciones.}
+
+\begin{itemize}
+
+\item Por construcción, las curvas integrales del campo $G$ son los levantamientos de las geodésicas.  Para obtener la geodésica a partir de la curva integral debemos proyectarla en la variedad.  Si $\tilde \gamma$ es la curva integral maximal que cumple $\tilde \gamma(0)=(p, X)$ entonces $\gamma = \pi \circ \tilde \gamma$ es la geodésica que verifica $\gamma(0)=p$ y $\dot \gamma (0)=X$.
+
+\item Sea $f$ una función definida en el fibrado tangente.  Dado un punto $(p,X)$ de dicho fibrado, sea $\gamma_X$ la geodésica que cumple $\dot  \gamma_X(0)= X$.  Entonces
+$$
+Gf(p,X) = \left.{\frac{d}{dt}}\right|_{t=0} f(\gamma_X(t), \dot \gamma_X(t))
+$$
+
+\item  El campo $G$ es diferenciable.  Para comprobarlo utilizaremos coordenadas locales.  Dada unas coordenadas $(x^1, \dots, x^n)$ en un abierto de $U$, se inducen unas cordenadas
+$(x^1, \dots, x^n, q^1, \dots, q^n)$ en un abierto de $T\V$.  En dichas coordenadas el campo se expresa
+$$
+G= q^i \frac{\partial}{\partial x^i} - \Gamma_{ij}^k q^i q^j \frac{\partial}{\partial q^k}
+$$
+lo que demuestra que en coordenadas es diferenciable. 
+
+\item El sistema de ecuaciones diferenciales de segundo orden que analizamos en la página \pageref{geodesica} permite construir localmente un campo en abiertos coordenados del fibrado tangente.  Dichos campos coinciden en las intersecciones de abiertos coordenados (esto puede probarse utilizando las fórmulas de cambio de coordenadas para los símbolos de Cristoffel), lo que da lugar a un campo global, que coincide con nuestro campo $G$.
+
+\end{itemize}
+
+En el caso riemanniano podemos construir de otro modo el campo geodé\-sico.  
+
+
+
+\begin{defi}
+
+Sea $(\V,g)$ una variedad riemanniana.  La función
+$$
+\begin{array}{rccc}
+E: & T\V& \lto & \R \\
+   & X_p & \lto & g(X_p,X_p)
+\end{array}
+$$
+se denomina {\sf función energía} de la variedad.
+
+\end{defi}
+
+Naturalmente $E$ es diferenciable.  En el caso de la física $E$ es la energía cinética que posee la partícula, de ahí el nombre utilizado.
+
+
+\bigskip
+
+Una de las propiedades más importantes que poseen las métricas riemannianas es que nos permiten identificar campos y $1$-formas.  Traducido al lenguaje de los fibrados, se establece un isomorfismo entre el fibrado tangente y el cotangente.  Dicho isomorfismo lo denominaremos {\sf polaridad} y lo denotaremos por $\phi$.
+$$
+\begin{array}{rccc}
+\phi: & T\V& \lto & T^* \V \\
+   & X_p & \lto & i_{X_p}g
+\end{array}
+$$   
+Se comprueba que $\phi$ es diferenciable y que es un isomorfismo.  A través de este isomorfismo podemos construir una forma simpléctica en $T\V$
+
+\begin{defi}
+
+Sea $\omega_2$ la forma simpléctica del fibrado cotangente.  Llamamos {\sf forma simpléctica riemanniana} y denotamos por $\omega_g$ a $\phi^*(\omega_2)$.
+
+\end{defi}
+
+Con esta forma diferencial $T\V$ es una variedad simpléctica.  La estructura simpléctica de $T\V$ depende de la métrica.  Diferentes métricas inducen diferentes estructuras simplécticas.
+
+Ahora construimos $G$ como el campo hamiltoniano asociado a la función energía.  $G$ es el único campo que cumple 
+$$
+i_G \omega_g = dE
+$$
+
+
+\noindent{\bf Observación.}
+
+\smallskip
+
+Las curvas integrales del campo $G$ son (los levantamientos horizontales de) las geodésicas.  La función energía es una integral primera del campo.  El movimiento de una particula libre en una variedad sigue exactamente las trayectorias geodésicas.  Como consecuencia, las partículas libres conservan la energía.
+
+\section{La aplicación exponencial}
+
+
+
+Hemos visto en el teorema \ref{teo:geodesica} que dado un elemento $X_p \in T\V$ existe una única geodésica $\gamma$ que cumple $\gamma(0)=p$ y $\dot \gamma (0)=X_p$.  La pregunta que nos hacemos es: ¿como depende la curva $\gamma$ del \guillemotleft valor inicial\guillemotright\  $X_p$? ¿Si variamos un poco el punto de aplicación o el vector $X_p$, la nueva geodésica estará \guillemotleft proxima\guillemotright\  a $\gamma$?
+
+Un posible camino para responder a esta pregunta es el siguiente: sabemos que a todo vector se le asigna una geodésica.  Podemos dotar de una topología al conjunto de geodésicas (o al de todas las curvas) y estudiar si esta asociación es continua, diferenciable, etc.  Este camino no lo estudiaremos.
+
+Otra posible forma de pensar es comparar las posiciones de los puntos para algún tiempo determinado, suponiendo que dicho puntos siguen trayectorias geodésicas.  Esto es más fácil de resolver pues estamos comparando puntos de la variedad $\V$.
+
+\bigskip
+
+
+Sea $G$ el campo geodésico definido en $\V$ y asociado a la conexión $\nabla$.  Dicho campo es diferenciable y genera un grupo uniparamétrico maximal
+$$
+\tau : U \subset \R \times T\V \lto T\V
+$$
+
+En general dicho  grupo uniparamétrico no es global, por lo que no estará definido en toda la variedad $\R \times T\V$ sino solamente en un abierto $U \subset \R \times T\V$. 
+
+\begin{defi}
+
+Llamamos {\sf dominio de la exponencial} al conjunto
+$$
+\mathcal{E}= \{ X \in T\V \text{ tales que } \gamma_X \text{ está definida en el intervalo } [0,1]\}
+$$
+
+\end{defi}
+
+El nombre dado a este conjunto quedará claro al definir la exponencial. Lo primero que vamos a demostrar es que $\mathcal{E}$ es abierto.  La demostración se basa en que el dominio del grupo uniparamétrico es también abierto.
+
+Si $(p,X)\in \mathcal{E}$, tenemos que la geodésica $\gamma_X$ está definida en un intervalo que contiene a $[0,1]$.  De este modo $(1,p,X)\in U$, que es abierto.  Como $\R \times T\V$ es un producto topológico, existe un entorno $I \times U'$ con $I \subset \R$ y $U' \subset T\V$ que cumple
+$$
+(1,p,X) \in I \times U' \subset U
+$$
+
+Entonces los puntos de $U'$ tienen geodésicas definidas para $t=1$, lo que implica que $U'$ es un abierto contenido en $\mathcal{E}$ y que contiene a $(p,X)$.  Hemos demostrado la 
+
+\begin{propo}
+
+El dominio de la exponencial $\mathcal{E}$ es un abierto de $T\V$.
+
+\end{propo}
+
+Dicho abierto contiene a los elementos neutros de todos los espacios vectoriales $T_p\V$, debido a que la geodésica con velocidad inicial cero está definida un tiempo infinito.  El conjunto que acabamos de mencionar es la imagen del campo nulo, entendiendo los campos como secciones del fibrado tangente.  Normalmente esta última propiedad se enuncia diciendo que $\mathcal{E}$ es un abierto que contiene a la sección nula.
+
+\begin{quote}
+
+\begin{pro}
+
+La sección nula es una subvariedad de $T\V$ isomorfa a la variedad $\V$.
+
+\end{pro}
+
+\end{quote}
+
+\begin{defi}
+
+Llamamos exponencial a la función 
+$$
+\begin{array}{lccc}
+\exp: & \mathcal{E} & \lto & \V \\
+    &  X & \lto &  \gamma_X(1)
+    \end{array}
+    $$
+    donde $\gamma_X$ es la geodésica que cumple $\dot \gamma_X(0)=X$.
+    
+    \end{defi}
+    
+Naturalmente no había sido gratuito denominar a $\mathcal{E}$ dominio de la exponencial, pues  es el dominio de la aplicación que acabamos de construir.  Es el mayor conjunto de $T\V$ donde nuestra definición de exponencial es posible.
+
+Como vemos, podríamos haber definido la exponencial sin recurrir a teoremas globales sobre integración de campos vectoriales.  Sin embargo, al hacerlo así, algunos de los resultados que enuciaremos sobre la exponencial son casi triviales.  El primero, que ya hemos visto, es que el dominio de la exponencial es un abierto que contiene a la sección nula.  Otros resultados son
+
+\begin{cor}
+
+La exponencial es una aplicación diferenciable.
+
+\end{cor}
+
+\dem
+
+Sabemos que el grupo uniparamétrico $\tau: U \rightarrow T\V$ es diferenciable.  Las curvas integrales del campo geodésico son los levantamientos de las geodésicas de $\V$.  Tenemos que $\pi \circ \tau(t,X)$ es la geodésica con velocidad inicial~$X$.  De este modo
+$$
+\exp(X)= \gamma_X(1) = \pi \circ \tau(1,X)
+$$
+que es evidentemente diferenciable por serlo $\tau$ y $\pi$.  \fin
+
+\begin{cor}
+
+Se cumple que $\gamma_X(t) = \exp(tX)$
+
+\end{cor}
+
+\dem
+
+Es una consecuencia inmediata de la propiedad de reparametrización de las geodésicas
+$$
+\exp(tX)= \gamma_{tX} (1) = \gamma_X (1t) = \gamma_X(t)
+$$
+
+De este modo las imagenes de las rectas que pasan por el origen de $T_p\V$ son precisamente las geodésicas que parten de $p$.\fin
+
+
+Así la exponencial es una función a partir de la cual se pueden construir todas las geodésicas de la variedad.  La exponencial transforma rectas en geodésicas, por lo que en cierto sentido es una herramienta que nos permite linealizar problemas, al menos en el entorno de un punto.
+
+
+\begin{quote}
+
+\begin{pro}
+
+Existen  variedades  que poseen geodésicas que no son completas.  En estas variedades la exponencial no puede estar definida en todo el fibrado tangente.  Dar ejemplos de estas variedades.
+
+\end{pro}
+
+\end{quote}
+
+
+\bigskip
+
+Denotamos por $\mathcal{E}_p$ al conjunto $\mathcal{E}\cap T_p\V$.  Es un abierto del espacio vectorial $T_p\V$ que contiene al cero.  Denotamos por $\exp_p$ a la aplicación exponencial restingida a cada uno de los abiertos
+$$
+\exp_p : \mathcal{E}_p \subset T_p \V \lto \V
+$$
+
+Dicha aplicación es diferenciable y como hemos visto $\exp_p(tX)$ es precisamente la geodésica que parte de $p$ y tiene como velocidad inicial $X$.
+
+\begin{quote}
+
+\begin{pro}
+
+Si $\exp_p(X)$ existe, entonces para todo $t \in [0,1]$ también existe $\exp_p(tX)$ .  Esto implica que el conjunto $\mathcal{E}_p$ es estrellado respecto al cero.
+
+\end{pro}
+
+\end{quote}
+
+\begin{quote}
+
+
+\begin{pro}
+
+Sea $\varphi: \V \rightarrow \W$ una isometría.  Dado $p \in \V$ el siguiente diagrama es conmutativo
+
+$$
+\xymatrix{
+T_p\V  \ar[d]_{\exp_p} \ar[r]^{\varphi_*}  &  \ar[d]^{\exp_{\varphi(p)}} T_{\varphi(p)} \W \\
+\V \ar[r]^\varphi & \W
+}
+$$
+donde cada exponencial es la asociada a la estructura riemanniana. ¿Es cierta esta propiedad en el caso de isometrías locales?
+
+
+\end{pro}
+
+\end{quote}
+
+\section{Entornos normales}
+
+En física, las geodésicas de una variedad, son las trayectorias de las particulas libres.  Veamos como se construye la exponencial utilizando esta analogía.
+
+Dada $X_p\in T_p\V$ consideramos la partícula que para $t=0$ está situada en~$p$ y tiene por velocidad inicial $X_p$.  Esta particula existe al menos un tiempo $t$.  Si dicho tiempo es inferior a $1$, entonces la exponencial de $X_p$ no está definida.  Pero si existe durante un tiempo superior a $1$ entonces $\exp(X_p)$ es el punto donde está situada la partícula para $t=1$.
+
+Sea ahora $q$ un punto suficientemente próximo a $p$.  Podemos pensar que variando la dirección de la velocidad inicial, siempre es posible conseguir que una partícula situada en $p$ sea capaz de llegar a $q$  Variando el módulo de la velocidad es posible que llegue a $q$ justamente cuando $t=1$.  Entonces todos los puntos próximos a $p$ serán de la forma $\exp(X)$ donde $X$ es un vector tangente en $p$.  Además si cambiamos un poco el vector velocidad inicial,  se llegará a otro punto distinto. Esta intuición física se confirmará en lo que sigue.
+
+Es de notar que estos razonamientos no son válidos si $p$ y $q$ no están suficientemente próximos.  Por ejemplo si situamos un obstáculo entre $p$ y $q$ será imposible que las partículas que salen de $p$ lleguen a $q$.
+
+También puede ocurrir que se llegue de $p$ a $q$ por dos caminos distintos, como es el caso de la esfera $S^2$.
+
+
+\begin{propo}
+
+Dado un punto $p \in\V$, la exponencial establece un difeomorfismo entre un entorno del cero en el espacio tangente y un entorno del punto.
+
+\end{propo}
+
+\dem
+
+Vamos a demostrar que la diferencial de $\exp_p$ en el punto cero es un isomorfismo.  Aplicando el teorema de la función inversa concluiremos.
+
+Como $T_p\V$ es un espacio vectorial, los espacios tangentes de todos los elementos $X \in T_p \V$ son isomorfos a dicho espacio vectorial.  En particular el espacio tangente en cero es isomorfo a $T_p\V$.  Calculemos la diferencial
+$$
+(\exp_p)_*(X)= \frac{d}{dt} (\exp_p tX)_{\mid t=0}= \frac{d}{dt} \gamma_X(t)_{\mid t=0} = X
+$$
+
+Luego la diferencial de la exponencial en el punto $0 \in T_p\V$ es precisamente la identidad, teniendo claro que hemos identificado el espacio tangente en cero con el propio espacio vectorial. \fin
+
+Gracias a la exponencial vemos que todo punto $q$ próximo a $p$ se puede unir a $p$ mediante una geodésica.
+
+Recordemos que un conjunto $U \subset T_p\V$ es estrellado respecto al cero si $X \in U$ implica que $tX \in U$ si $t\in[0,1]$.
+
+\begin{defi}
+
+Un entorno de $p$ que sea difeomorfo a un entorno estrellado de cero mediante la aplicación exponencial se denomina {\sf entorno normal} de $p$.
+
+\end{defi}
+
+Si $U$ es un entorno normal de $p$ y $q$ es otro punto del entorno, existe una única geodésica que une $p$ con $q$.  Dicha geodésica puede estar recorrida a distintas velocidades por lo que en realidad son muchas las geodésicas que los unen.  Estamos suponiendo naturalmente, que salvo esa ambigüedad, la geodésicas es única.  También se puede decir que el soporte de la geodésica que los une es único
+
+En el caso riemanniano cada espacio tangente se puede dotar de una estructura euclídea, gracias a  la métrica riemanniana.  Tiene sentido entonces hablar de bolas y esferas en el 
+espacio tangente.  Si estamos en una abierto normal de $p$, las imagenes de las bolas centradas en cero se denominan {\sf bolas normales}.  Lo mismo haremos con las esferas y otros conceptos relacionados.
+
+Como bien sabemos todo difeomorfismo de un entorno de un punto con un abierto de un espacio vectorial nos permite establecer un sistemas de coordenadas.  Si el espacio vectorial es $\R^n$, la cosa está clara, por que en  $\R^n$ existen unas coordenadas canónicas.  Sin embargo en un espacio vectorial abstracto debemos elegir una base para tener dichas coordenadas.  Nosotros elegiremos bases ortonormales, dado que los espacios son euclídeos.
+
+\begin{defi}
+
+Fijada una base ortonormal en $T_p\V$ llamamos {\sf coordenadas normales} en $p$ a las asociadas a la aplicación exponencial.
+
+\end{defi}
+
+Por lo tanto todo entorno normal tiene asociadas unas coordenadas normales.  Dichas coordenadas no son únicas pues dependen de la base del espacio vectorial, pero todas ellas están relacionadas a través de una aplicación ortogonal.  Naturalmente todas las construcciones que hagamos con coordenadas serán independientes de la base ortonormal elegida en cada espacio tangente.
+
+Las coordenadas normales se adaptan bien a problemas relacionados con construcciones propias de las variedades con conexión afín y a las variedades riemannianas.  Algunas de las características más importantes de las coordenadas normales se desgranan en los siguientes resultados, donde separaremos los resultados afines de los riemannianos.
+
+\begin{propo}
+
+Dadas unas coordenadas normales en un entorno de $p$ se cumple:
+
+\begin{enumerate}[\indent a) ]
+
+\item  Las coordenadas de $p$ son $(0, \dots, 0)$.
+
+\item Si $X= a_iE_i$ es un vector expresado en la base ortonormal, entonces
+$$
+\gamma_X(t)=(ta_1,\dots, ta_n)
+$$
+
+\end{enumerate}
+
+\end{propo}
+
+\dem
+
+La parte $a)$ es evidente y para la parte $b)$ basta recordar que $\exp(tX)= \gamma_X(t)$.  \fin
+
+Como era de esperar en coordenadas normales las geodésicas son simplemente rectas que pasan por el origen.  
+
+En el caso riemanniano tenemos
+
+\begin{propo}
+
+Dadas unas coordenadas normales en un entorno de $p$ se cumple:
+
+\begin{enumerate}[\indent a) ]
+
+\item  $g_{ij}(p)= \delta_{ij}$.  En $p$, y solo en ese punto, la base $\{\partial_i\}$ es ortonormal.
+
+\item  Las primeras derivadas parciales de $g_{ij}$ y los símbolos de Cristoffel en~$p$ (y solo en ese punto) se anulan.
+
+\end{enumerate}
+
+\end{propo}
+
+\dem
+
+Al lector.  \fin
+
+Como hemos visto en un entorno normal $U$ de $p$, todo punto se puede unir con $p$ mediante una geodésica.  ¿Pero dados dos puntos $q$ y $q'$ de $U$ se unen también por una geodésica?  En general esto no es cierto, debido a que $U$ es entorno normal de $p$, pero no lo tiene por que ser de los puntos $q$ y~$q'$.  Sin embargo si $U$ fuese entorno normal de todos los puntos, si que sería posible resolver el problema anterior.
+
+Esto conduce a la siguiente
+
+\begin{defi}
+
+Un entorno $W$ de $p$ es totalmente normal, si $W$ es entorno normal de todos sus puntos..
+
+\end{defi}
+
+\begin{propo}
+
+Todo punto tienen un entorno totalmente normal.
+
+\end{propo}
+
+\dem
+
+La demostración es solo y exclusivamente técnica, por lo que remitimos al lector a la bibliografia (\cite{leerie}, \cite{carrie}).  \fin
+
+
+
+\section{Teorema de Cartan-Hadamard}
+
+Una de las partes más interesantes de la geometría riemanniana es deducir consecuencias globales a partir de hechos puramente locales.  El teorema de Cartan-Hadamard afirma que bajo ciertas condiciones, una variedad es isomorfa a $\R^n$.
+
+Como sabemos, la curvatura, que es una propiedad local, pueda dar lugar a características globales de la variedad.  Para hacer un estudio de las propiedades globales se supone que la variedad es completa y además simplemente conexa.  La necesidad de suponer la completitud es más o menos clara desde el punto de vista geométrico.  Las variedades que no son completas son aquellas a las que les falta ``algo''.  El ser simplemente conexas viene impuesto por la topología.  Si una variedad no es simplemente conexa, podemos considerar su recubridor universal que si lo es.  La variedad en cuestión es isomorfa localmente al recubridor universal y además dicha variedad se puede construir como un  cociente de una variedad simplemente conexa.
+
+La intuición nos dice que la curvatura negativa hace que las geodésicas que parten de un punto se alejen unas de otras.  Bajo ciertas condiciones veremos que nunca se cruzan.  De este modo la aplicación exponencial en el punto en cuestión será inyectiva.  Si la variedad es completa, la aplicación exponencial es epiyectiva y obtendremos de ese modo que las variedad es difeomorfa a $\R^n$.
+
+Para que la aplicación exponencial  en un punto $p$ no sea inyectiva, debe existir un punto $q$ que sea conjugado de $p$.  Esto implica que existe un campo de Jacobi a lo largo de una geodésica que une $p$ y $q$ que es nulo en los dos puntos.
+
+\begin{defi}
+
+Una variedad $\V$ es de {\sf curvatura negativa} en un punto $p$ si todas las curvaturas seccionales $K_p(\pi)$ son negativas.  Una variedad es de  curvatura negativa si lo es en todos sus puntos.
+
+\end{defi}
+
+Veamos que en una variedad de curvatura negativa no existen puntos conjugados.
+
+\begin{lema}
+
+Sea $\V$ una variedad riemanniana completa y de curvatura negativa.  Entonces en $\V$ n existen puntos conjugados.
+
+\end{lema}
+
+\dem
+
+Sea $p$ un punto arbitrario de $\V$.  Todo punto $Q$ de $\V$ se puede unir con una geodésica a $p$, debido a la completitud de la variedad.  Consideramos entonces una geodésica $\gamma:[0,\infty)\lto \V$ que parta de $p$.  Para que exista un punto conjugado con $p$ a lo largo de $\gamma$ debe existir un campo de Jacobi $J$ que se anule en $p$ y en otro punto.  Supongamos entonces que $J$ es un campo de Jacobi que cumple $J(0)=0$.   Consideramos la función
+$$
+f(t) = \escalar{J(t)}{J(t)}
+$$
+y analizamos  sus derivadas.
+$$
+\frac{d}{dt}f(t) = \frac{d}{dt}\escalar{J(t)}{J(t)}= \escalar{D_t J}{J}+ \escalar{J}{D_t J}= 2 \escalar{D_tJ}{J}
+$$
+
+Derivamos otra vez
+$$
+\frac{d^2}{dt^2}f(t) = 2 \escalar{D^2_tJ}{J} + 2\escalar{D_tJ}{D_tJ}
+$$
+Tras aplicar nuevamente las propiedades de la derivada covariante.  Al aparecerla expresión $D^2_t J$, podemos introducir la curvatura, quedando la expresión anterior como
+$$
+\abs{D_t J}^2-\escalar{R(\dot \gamma, J, \dot \gamma)}{J}
+$$
+El último sumando no es mas que la curvatura seccional del plano generado por los vectores $\dot \gamma$ y $J$ (salvo el factor del área del paralelogramo) y es por tanto negativa o nula.  Como la última expresión consta de dos partes positivas o nulas concluimos que
+$$
+\frac{d^2}{dt^2}f(t)\geq 0 \text{ en todo el intervalo }[0,\infty)
+$$
+
+Por lo tanto la función es convexa y si se anula en otro punto, se anula en todos los puntos intermedios y entonces, debido a la ecuación de Jacobi, se anula globalmente.  \fin
+
+
+
+
+
+
+
+\end{document}
+
